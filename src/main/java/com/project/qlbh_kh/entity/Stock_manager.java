@@ -1,13 +1,13 @@
 package com.project.qlbh_kh.entity;
 
-public class stock_manager {
+public class Stock_manager {
     private int orderId;
     private String product;
     private int quantity;
     private String date;
     private String operation;
 
-    public stock_manager(int orderId, String item, int quantity, String date, String operation) {
+    public Stock_manager(int orderId, String item, int quantity, String date, String operation) {
         this.orderId = orderId;
         this.product = item;
         this.quantity = quantity;

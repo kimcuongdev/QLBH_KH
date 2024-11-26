@@ -1,13 +1,13 @@
 package com.project.qlbh_kh.entity;
 
-public class order_manager {
+public class Order_manager {
     private int id;
     private String customer_name;
     private double total_payment;
     private String receiver_name;
     private String date;
     private String operation;
-    public order_manager(int id, String customer_name, double total_payment, String receiver_name, String date, String operation)
+    public Order_manager(int id, String customer_name, double total_payment, String receiver_name, String date, String operation)
     {
         this.id = id;
         this.customer_name = customer_name;

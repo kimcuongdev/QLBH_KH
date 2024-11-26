@@ -1,6 +1,5 @@
 package com.project.qlbh_kh.controllers;
-
-import com.project.qlbh_kh.entity.customer;
+import com.project.qlbh_kh.entity.Receiver;
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,55 +17,55 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-public class danhSachKhachHangController implements Initializable {
+public class DanhSachNguoiNhanController implements  Initializable{
     @FXML
-    protected TableView<customer> customerList;
-    protected ObservableList<customer> customers = FXCollections.observableArrayList();
+    protected TableView<Receiver> receiverList;
+    protected ObservableList<Receiver> receivers = FXCollections.observableArrayList();
     @FXML
-    protected TableColumn<customer, String> addressColumn;
+    protected TableColumn<Receiver, String> addressColumn;
 
     @FXML
-    protected TableColumn<customer, String> customerNameColumn;
+    protected TableColumn<Receiver, String> receiverNameColumn;
 
     @FXML
-    protected TextField customerNameField;
+    protected TextField receiverNameField;
 
     @FXML
-    protected TableColumn<customer, String> phoneNumberColumn;
+    protected TableColumn<Receiver, String> phoneNumberColumn;
 
-    protected basicController mainController;
-    public void setMainController(basicController basicController) {
+    protected BasicController mainController;
+    public void setMainController(BasicController basicController) {
         this.mainController = basicController;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //cai dat thuoc tinh du lieu cho cac cot
-        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        receiverNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         //load du lieu
-        loadCustomerList();
+        loadReceiverList();
         //cai dat bo loc tim kiem theo ten KH
-        customerNameField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            customerList.setItems(customers.filtered(customer -> {
-                String name = customer.getName();
+        receiverNameField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            receiverList.setItems(receivers.filtered(receiver -> {
+                String name = receiver.getName();
                 System.out.println(name);
                 return name.toLowerCase().contains(newValue.toLowerCase());
             }));
         }));
-        //chon KH
-        customerList.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+        //chon nguoi nhan
+        receiverList.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null && mainController != null)
             {
-                mainController.setSelectedCustomer(newValue.getCustomer_id(),newValue.getName());
-                ((Stage) customerList.getScene().getWindow()).close();
+                mainController.setSelectedReceiver(newValue.getReceiver_id(),newValue.getName());
+                ((Stage) receiverList.getScene().getWindow()).close();
             }
         }));
     }
-    public void loadCustomerList()
+    public void loadReceiverList()
     {
-        String sql = "exec customers_list";
+        String sql = "exec receivers_list";
         try
         {
             Connection connection = JDBCUtil.getConnection();
@@ -78,9 +77,9 @@ public class danhSachKhachHangController implements Initializable {
                 String name = resultSet.getString(2);
                 String address = resultSet.getString(3);
                 String phone_number = resultSet.getString(4);
-                customers.add(new customer(id,name,address,phone_number));
+                receivers.add(new Receiver(id,name,address,phone_number));
             }
-            customerList.setItems(customers);
+            receiverList.setItems(receivers);
         } catch (Exception e)
         {
             e.printStackTrace();

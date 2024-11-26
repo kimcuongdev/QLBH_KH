@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class basicController implements Initializable {
+public class BasicController implements Initializable {
     @FXML
     protected Button execute;
 
@@ -121,7 +121,7 @@ public class basicController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/danhSachTenSanPhamView.fxml"));
             Scene productListScene = new Scene(fxmlLoader.load());
             //set controller cha cho controller cua danh sach ten mat hang
-            danhSachTenSanPhamController controller = fxmlLoader.getController();
+            DanhSachTenSanPhamController controller = fxmlLoader.getController();
             controller.setMainController(this);
             //tao stage moi
             Stage productListStage = new Stage();

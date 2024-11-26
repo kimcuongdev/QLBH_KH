@@ -1,6 +1,6 @@
 package com.project.qlbh_kh.controllers;
 
-import com.project.qlbh_kh.entity.product;
+import com.project.qlbh_kh.entity.Product;
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,22 +17,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-public class danhSachTenSanPhamController implements Initializable {
+public class DanhSachTenSanPhamController implements Initializable {
 
     @FXML
     private TextField productNameField;
 
     @FXML
-    private ListView<product> productList;
-    ObservableList<product> products = FXCollections.observableArrayList();
+    private ListView<Product> productList;
+    ObservableList<Product> products = FXCollections.observableArrayList();
 
     @FXML
     void filterProductName(ActionEvent event) {
         System.out.println(productNameField.getText());
     }
     //ham set controller cha
-    private basicController mainController;
-    public void setMainController(basicController mainController) {
+    private BasicController mainController;
+    public void setMainController(BasicController mainController) {
         this.mainController = mainController;
     }
 
@@ -63,7 +62,7 @@ public class danhSachTenSanPhamController implements Initializable {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
-            while (resultSet.next()) products.add(new product(resultSet.getInt(1),
+            while (resultSet.next()) products.add(new Product(resultSet.getInt(1),
                     resultSet.getString(2)));
             productList.setItems(products);
         } catch (Exception e)

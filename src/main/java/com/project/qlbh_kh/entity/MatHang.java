@@ -1,13 +1,13 @@
 package com.project.qlbh_kh.entity;
 
-public class matHang {
+public class MatHang {
     private String tenMatHang;
     private int soLuong;
     private String donViTinh;
     private double giaNhapVao;
     private double giaBanRa;
 
-    public matHang(String tenMatHang, int soLuong) {
+    public MatHang(String tenMatHang, int soLuong) {
         this.tenMatHang = tenMatHang;
         this.soLuong = soLuong;
     }

@@ -1,6 +1,6 @@
 package com.project.qlbh_kh.controllers;
 
-import com.project.qlbh_kh.entity.receiver;
+import com.project.qlbh_kh.entity.Customer;
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.fxml.Initializable;
 
@@ -8,11 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class danhSachNguoiNhanXuatController extends danhSachNguoiNhanController implements Initializable {
+public class DanhSachKhachHangNhapController extends DanhSachKhachHangController implements Initializable {
+
     @Override
-    public void loadReceiverList()
+    public void loadCustomerList()
     {
-        String sql = "exec receivers_out_list";
+        String sql = "exec customers_in_list";
         try
         {
             Connection connection = JDBCUtil.getConnection();
@@ -24,12 +25,13 @@ public class danhSachNguoiNhanXuatController extends danhSachNguoiNhanController
                 String name = resultSet.getString(2);
                 String address = resultSet.getString(3);
                 String phone_number = resultSet.getString(4);
-                receivers.add(new receiver(id,name,address,phone_number));
+                customers.add(new Customer(id,name,address,phone_number));
             }
-            receiverList.setItems(receivers);
+            customerList.setItems(customers);
         } catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+
 }

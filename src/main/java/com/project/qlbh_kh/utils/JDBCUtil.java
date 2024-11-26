@@ -13,7 +13,7 @@ public class JDBCUtil {
             DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 
             //lay thong tin
-            String url= "jdbc:sqlserver://DESKTOP-H6MAA1G:1433;databaseName=BTL_QL_BanHang;encrypt=true;trustServerCertificate=true";
+            String url= "jdbc:sqlserver://localhost:1433;databaseName=BTL_QL_BanHang;encrypt=true;trustServerCertificate=true";
             String userName = "sa";
             String password = "admin";
 

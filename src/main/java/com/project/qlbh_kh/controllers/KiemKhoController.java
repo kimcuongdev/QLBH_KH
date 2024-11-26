@@ -1,6 +1,6 @@
 package com.project.qlbh_kh.controllers;
 
-import com.project.qlbh_kh.entity.product;
+import com.project.qlbh_kh.entity.Product;
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -14,13 +14,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 
-public class kiemKhoController {
+public class KiemKhoController {
     @FXML
-    private TableView<product> tableView;
+    private TableView<Product> tableView;
     @FXML
-    private TableColumn<product, String> prodNameColumn;
+    private TableColumn<Product, String> prodNameColumn;
     @FXML
-    private TableColumn<product,String> prodQuantityColumn;
+    private TableColumn<Product,String> prodQuantityColumn;
     @FXML
     public void initialize() {
         prodNameColumn.setCellValueFactory(new PropertyValueFactory<>("prod_name"));
@@ -28,7 +28,7 @@ public class kiemKhoController {
         loadStockData();
     }
     private void loadStockData() {
-        ObservableList<product> matHangList = FXCollections.observableArrayList();
+        ObservableList<Product> matHangList = FXCollections.observableArrayList();
         Connection conn = null;
         try {
             conn = JDBCUtil.getConnection();
@@ -39,7 +39,7 @@ public class kiemKhoController {
             while (rs.next()) {
                 String tenMatHang = rs.getString(1);
                 int soLuong = rs.getInt(2);
-                matHangList.add(new product(tenMatHang, soLuong));
+                matHangList.add(new Product(tenMatHang, soLuong));
             }
             tableView.setItems(matHangList);
         } catch (Exception e) {

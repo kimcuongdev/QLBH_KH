@@ -1,26 +1,26 @@
 package com.project.qlbh_kh.entity;
 
-public class customer {
-    private int customer_id;
+public class Receiver {
+    private int receiver_id;
     private String name;
     private String address;
     private String address_detail;
     private String operation;
     private String phone_number;
 
-    public customer(int customer_id, String name, String address, String phone_number){
-        this.customer_id = customer_id;
+    public Receiver(int receiver_id, String name, String address, String phone_number){
+        this.receiver_id = receiver_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getReceiver_id() {
+        return receiver_id;
     }
 
-    public void setCustomer_id(int customer_in_id) {
-        this.customer_id = customer_in_id;
+    public void setCustomer_id(int receiver_id) {
+        this.receiver_id = receiver_id;
     }
 
     public String getName() {
