@@ -7,6 +7,7 @@ public class Product {
     private String unit_sold;
     private double price_in;
     private double price_out;
+    private double total_amount;
     public Product(int prod_id, String prod_name, double price_in)
     {
         this.prod_name = prod_name;
@@ -22,6 +23,17 @@ public class Product {
     {
         this.prod_name = prod_name;
         this.quantity = quantity;
+    }
+    public Product(String prod_name, int quantity, double price_in)
+    {
+        this.prod_name = prod_name;
+        this.quantity = quantity;
+        this.price_in = price_in;
+    }
+    public Product(String prod_name, double price_in)
+    {
+        this.prod_name = prod_name;
+        this.price_in = price_in;
     }
 
     public String getProd_name() {
