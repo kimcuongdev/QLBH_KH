@@ -1,12 +1,8 @@
 package com.project.qlbh_kh.controllers;
 
-import com.project.qlbh_kh.entity.Customer;
-import com.project.qlbh_kh.entity.Order_manager;
 import com.project.qlbh_kh.entity.Product;
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -19,18 +15,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
-import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class TaoHoaDonController extends BasicController {
@@ -40,13 +29,13 @@ public class TaoHoaDonController extends BasicController {
     @FXML public Button findCustomerButton;
     @FXML public Button addProductButton;
     @FXML public Button saveButton;
+    @FXML public Button findReceiverButton;
 
     @FXML public TableView<Product> tableView;
     @FXML public TableColumn<Product,String> productNameColumn;
     @FXML public TableColumn<Product,Double> unitPriceColumn;
     @FXML public TableColumn<Product,Double> totalAmountColumn;
     @FXML public TableColumn<Product,Integer> quantityColumn;
-    ObservableList<Order_manager> data = FXCollections.observableArrayList();
     @FXML
     public TextField tongTienTextField;
     @Override
@@ -91,7 +80,11 @@ public class TaoHoaDonController extends BasicController {
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("prod_name"));
 
         // Thiết lập cho cột giá
-        unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
+        this.operation = "in";
+        if(operation.equals("in"))
+            unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
+        else if(operation.equals("out"))
+            unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_out"));
 
         // Thiết lập cho cột số lượng
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -101,7 +94,14 @@ public class TaoHoaDonController extends BasicController {
             public void handle(TableColumn.CellEditEvent<Product, Integer> productIntegerCellEditEvent) {
                 Product product = productIntegerCellEditEvent.getRowValue();
                 product.setQuantity(productIntegerCellEditEvent.getNewValue());
+                for(Product product1: productList){
+                    if(product1.getProd_id() == product.getProd_id()){
+                        product1.setQuantity(productIntegerCellEditEvent.getNewValue());
+                        break;
+                    }
+                }
                 tableView.refresh();
+                tinhTongTien();
             }
         });
 
@@ -188,6 +188,61 @@ public class TaoHoaDonController extends BasicController {
         }
     }
 
+    @FXML
+    public void openReceiverList()
+    {
+        System.out.println("open receiver list");
+        if (operation == null)
+        {
+            System.out.println("null handle");
+        }
+        else if (operation.equals("in"))
+        {
+            System.out.println("in handle");
+            try {
+                //load view cho danh sach khach hang
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/danhSachNguoiNhanNhapView.fxml"));
+                Scene customerInListScene = new Scene(fxmlLoader.load());
+                //set controller cha cho controller cua danh sach ten mat hang
+                DanhSachNguoiNhanNhapController controller = fxmlLoader.getController();
+                controller.setMainController(this);
+                //tao stage moi
+                Stage receiverListStage = new Stage();
+                receiverListStage.initModality(Modality.APPLICATION_MODAL);
+                receiverListStage.initOwner(receiverNameField.getScene().getWindow());
+                receiverListStage.setTitle("Danh sách khách hàng nhập");
+                receiverListStage.setScene(customerInListScene);
+                //show
+                receiverListStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (operation.equals("out"))
+        {
+            System.out.println("out handle");
+            try {
+                //load view cho danh sach khach hang
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/danhSachNguoiNhanXuatView.fxml"));
+                Scene customerInListScene = new Scene(fxmlLoader.load());
+                //set controller cha cho controller cua danh sach ten mat hang
+                DanhSachNguoiNhanXuatController controller = fxmlLoader.getController();
+                controller.setMainController(this);
+                //tao stage moi
+                Stage receiverListStage = new Stage();
+                receiverListStage.initModality(Modality.APPLICATION_MODAL);
+                receiverListStage.initOwner(receiverNameField.getScene().getWindow());
+                receiverListStage.setTitle("Danh sách khách hàng xuất");
+                receiverListStage.setScene(customerInListScene);
+                //show
+                receiverListStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void addProductToTable(Product product) {
         boolean exists = productList.stream()
@@ -202,8 +257,8 @@ public class TaoHoaDonController extends BasicController {
                 tinhTongTien();
             }
         } else {
-            Product newProduct = new Product(product.getProd_name(), 1,product.getPrice_in());
-            productList.add(newProduct);
+            product.setQuantity(1);
+            productList.add(product);
             tinhTongTien();
         }
         tableView.setItems(productList);
@@ -211,34 +266,52 @@ public class TaoHoaDonController extends BasicController {
 //
     @FXML
     private void addProduct() {
-        String fxmlPath = "/com/project/qlbh_kh/views/product_popup.fxml";
+        if(operation.equals("in")){
+            String fxmlPath = "/com/project/qlbh_kh/views/product_popup_in.fxml";
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                if (loader.getLocation() == null) {
+                    System.out.println("FXML file not found: " + fxmlPath);
+                    return;
+                }
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            if (loader.getLocation() == null) {
-                System.out.println("FXML file not found: " + fxmlPath);
-                return;
+                Scene productInList = new Scene(loader.load());
+                SanPhamPopUpNhap popupController = loader.getController();
+                popupController.setMainController(this);
+                Stage popupStage = new Stage();
+                popupStage.initModality(Modality.APPLICATION_MODAL);
+                popupStage.initOwner(tableView.getScene().getWindow());
+                popupStage.setTitle("Chọn Mặt Hàng");
+                popupStage.setScene(productInList);
+                popupStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+        else {
+            String fxmlPath = "/com/project/qlbh_kh/views/product_popup_out.fxml";
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                if (loader.getLocation() == null) {
+                    System.out.println("FXML file not found: " + fxmlPath);
+                    return;
+                }
 
-            Scene productInList = new Scene(loader.load());
-            PopUpController popupController = loader.getController();
-            popupController.setMainController(this);
-            String operationType = operationBox.getValue(); // Lấy giá trị được chọn
-            if (operationType != null) {
-                popupController.setType(operationType); // Truyền giá trị loại hàng
+                Scene productInList = new Scene(loader.load());
+                SanPhamPopUpXuat popupController = loader.getController();
+                popupController.setMainController(this);
+                Stage popupStage = new Stage();
+                popupStage.initModality(Modality.APPLICATION_MODAL);
+                popupStage.initOwner(tableView.getScene().getWindow());
+                popupStage.setTitle("Chọn Mặt Hàng");
+                popupStage.setScene(productInList);
+                popupStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.initOwner(tableView.getScene().getWindow());
-            popupStage.setTitle("Chọn Mặt Hàng");
-            popupStage.setScene(productInList);
-            popupStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
-//
+
     private void tinhTongTien() {
         Double tongTien = productList.stream()
                 .mapToDouble(product -> product.getPrice_in() * product.getQuantity())
@@ -247,18 +320,17 @@ public class TaoHoaDonController extends BasicController {
     }
     public void setCustomerInformation(int customerID)
     {
-        System.out.println("tao dang setting " + customerID );
+//        System.out.println("tao dang setting " + customerID );
         String sql = "exec customers_list";
 
         try
         {
-
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next())
             {
-                System.out.println("dang lay sql");
+//                System.out.println("dang lay sql");
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
                 String address = resultSet.getString(3);
@@ -266,13 +338,125 @@ public class TaoHoaDonController extends BasicController {
                 if(id == customerID){
                     phoneNumberField.setText(phone_number);
                     addressField.setText(address);
-                    System.out.println("da lay dc khach hang");
+//                    System.out.println("da lay dc khach hang");
                 }
-
             }
         } catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public void luuHoaDon(){
+        if (fromDate != null) System.out.println("Bill Date: " + fromDateValue);
+        if (selectedCustomerId != 0) System.out.println("Customer in ID " + selectedCustomerId);
+        if (selectedReceiverId != 0) System.out.println("receiver Name: "+ selectedReceiverId);
+        int newOrderId = 0;
+        if(operation.equals("in")){
+            try
+            {
+                Connection connection = JDBCUtil.getConnection();
+                // Gọi stored procedure
+                String sql = "{CALL dbo.TaoHD_in(?, ?, ?, ?)}";  // Cú pháp gọi procedure
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    // Set các input parameters
+                    stmt.setInt(1, selectedCustomerId); // @customer_id
+                    stmt.setInt(2, selectedReceiverId);  // @receiver_id
+                    stmt.setDate(3, fromDateValue == null ? null : Date.valueOf(fromDateValue));   // @bill_date
+
+                    // Đăng ký output parameter
+                    stmt.registerOutParameter(4, Types.INTEGER);  // @new_order_id (output)
+
+                    // Thực thi stored procedure
+                    stmt.execute();
+
+                    // Lấy giá trị của OUTPUT parameter
+                    newOrderId = stmt.getInt(4);  // Lấy giá trị của @new_order_id
+
+                    // In kết quả
+//                System.out.println("New Order ID: " + newOrderId);
+
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            Connection connection = JDBCUtil.getConnection();
+
+            for (Product product : productList){
+                System.out.println(newOrderId +" "+  product.getProd_id() + " " + product.getQuantity());
+                try{
+                    String sql = "{call dbo.TaoHD_in_detail(?,?,?)}";
+                    PreparedStatement stmt = connection.prepareStatement(sql);
+                    // Set các input parameters
+                    stmt.setInt(1, newOrderId);
+                    stmt.setInt(2, product.getProd_id());
+                    stmt.setInt(3, product.getQuantity());
+                    stmt.execute();
+                }
+                catch (Exception e){
+                    System.out.println("Them san pham loi "  + e);
+                }
+            }
+            System.out.println("Tao Hoa Don Thanh cong");
+        }
+        else {
+            try
+            {
+                Connection connection = JDBCUtil.getConnection();
+                // Gọi stored procedure
+                String sql = "{CALL dbo.TaoHD_out(?, ?, ?, ?)}";  // Cú pháp gọi procedure
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    // Set các input parameters
+                    stmt.setInt(1, selectedCustomerId); // @customer_id
+                    stmt.setInt(2, selectedReceiverId);  // @receiver_id
+                    stmt.setDate(3, fromDateValue == null ? null : Date.valueOf(fromDateValue));   // @bill_date
+
+                    // Đăng ký output parameter
+                    stmt.registerOutParameter(4, Types.INTEGER);  // @new_order_id (output)
+
+                    // Thực thi stored procedure
+                    stmt.execute();
+
+                    // Lấy giá trị của OUTPUT parameter
+                    newOrderId = stmt.getInt(4);  // Lấy giá trị của @new_order_id
+
+                    // In kết quả
+//                System.out.println("New Order ID: " + newOrderId);
+
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            Connection connection = JDBCUtil.getConnection();
+
+            for (Product product : productList){
+                System.out.println(newOrderId +" "+  product.getProd_id() + " " + product.getQuantity());
+                try{
+                    String sql = "{call dbo.TaoHD_out_detail(?,?,?)}";
+                    PreparedStatement stmt = connection.prepareStatement(sql);
+                    // Set các input parameters
+                    stmt.setInt(1, newOrderId);
+                    stmt.setInt(2, product.getProd_id());
+                    stmt.setInt(3, product.getQuantity());
+                    stmt.execute();
+                }
+                catch (Exception e){
+                    System.out.println("Them san pham loi "  + e);
+                }
+            }
+            System.out.println("Tao Hoa Don Thanh cong");
         }
     }
 }
