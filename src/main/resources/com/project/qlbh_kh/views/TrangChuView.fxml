@@ -48,12 +48,12 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="receiverOutManageButton" text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý vận chuyển mua vào" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Button fx:id="receiverInManageButton" text="Quản lý vận chuyển mua vào" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>

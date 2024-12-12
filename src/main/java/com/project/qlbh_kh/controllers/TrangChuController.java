@@ -9,6 +9,12 @@ public class TrangChuController {
     @FXML
     private Button productManageButton;
 
+    @FXML
+    private Button receiverInManageButton;
+
+    @FXML
+    private Button receiverOutManageButton;
+
     public void setMainAppController(MainAppController mainAppController) {
         this.mainAppController = mainAppController;
     }
@@ -19,6 +25,24 @@ public class TrangChuController {
             if (mainAppController != null) {
                 try {
                     mainAppController.loadContent("/com/project/qlbh_kh/views/QuanLyMatHangView.fxml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        receiverInManageButton.setOnAction(event -> {
+            if (mainAppController != null) {
+                try {
+                    mainAppController.loadContent("/com/project/qlbh_kh/views/danhSachNguoiNhanNhapView.fxml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        receiverOutManageButton.setOnAction(event -> {
+            if (mainAppController != null) {
+                try {
+                    mainAppController.loadContent("/com/project/qlbh_kh/views/danhSachNguoiNhanXuatView.fxml");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,14 +1,20 @@
 package com.project.qlbh_kh.controllers;
+import com.project.qlbh_kh.entity.Product;
 import com.project.qlbh_kh.entity.Receiver;
 import com.project.qlbh_kh.utils.JDBCUtil;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,22 +23,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-public class DanhSachNguoiNhanController implements  Initializable{
+public class    DanhSachNguoiNhanController implements  Initializable{
     @FXML
     protected TableView<Receiver> receiverList;
+    @FXML
     protected ObservableList<Receiver> Receivers = FXCollections.observableArrayList();
     @FXML
     protected TableColumn<Receiver, String> addressColumn;
-
     @FXML
     protected TableColumn<Receiver, String> receiverNameColumn;
-
+    @FXML
+    protected TableColumn<Receiver, String> emailColumn;
+    @FXML
+    protected TableColumn<Receiver, Integer> countColumn;
     @FXML
     protected TextField receiverNameField;
-
     @FXML
     protected TableColumn<Receiver, String> phoneNumberColumn;
-
+    @FXML
+    protected Button addNewReceiver;
+    @FXML
+    private Button reloadTable;
     protected BasicController mainController;
     public void setMainController(BasicController basicController) {
         this.mainController = basicController;
@@ -44,6 +55,35 @@ public class DanhSachNguoiNhanController implements  Initializable{
         receiverNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        countColumn.setCellValueFactory(cellData -> {
+            return Bindings.createIntegerBinding(
+                    () -> {
+                        try {
+                        Receiver receiver = cellData.getValue();
+                        Connection connection = JDBCUtil.getConnection();
+                        String sql = "SELECT COUNT(*)\n" +
+                                "FROM order_in_tb\n" +
+                                "WHERE receiver_in_id =" + receiver.getReceiver_id() + ";";
+                        System.out.println("id ng nhan" + receiver.getReceiver_id());
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        ResultSet resultSet = statement.executeQuery();
+                        if (resultSet.next()) {
+                            int orderCount = resultSet.getInt(1);
+                            System.out.println("order count" + orderCount);
+                            return orderCount;
+                        }
+                        } catch (Exception e) {
+                            return 0;
+                        }
+                        return null;
+                    }
+            ).asObject();
+        });
+        receiverList.setOnMouseClicked(mouseEvent -> {
+            Receiver selectedReceiver = receiverList.getSelectionModel().getSelectedItem();
+            modifyReceiver(selectedReceiver);
+        });
         //load du lieu
         loadReceiverList();
         //cai dat bo loc tim kiem theo ten KH
@@ -65,6 +105,7 @@ public class DanhSachNguoiNhanController implements  Initializable{
     }
     public void loadReceiverList()
     {
+        Receivers.clear();
         String sql = "exec receivers_list";
         try
         {
@@ -77,11 +118,28 @@ public class DanhSachNguoiNhanController implements  Initializable{
                 String name = resultSet.getString(2);
                 String address = resultSet.getString(3);
                 String phone_number = resultSet.getString(4);
-                Receivers.add(new Receiver(id,name,address,phone_number));
+                String email = resultSet.getString(5);
+                Receivers.add(new Receiver(id,name,address,phone_number,email));
             }
             receiverList.setItems(Receivers);
         } catch (Exception e)
         {
+            e.printStackTrace();
+        }
+    }
+
+    public void modifyReceiver(Receiver selectedReceiver) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ChinhSuaNguoiNhanNhap.fxml"));
+            Scene scene = new Scene(loader.load());
+            ChinhSuaNguoiNhanNhapController controller = loader.getController();
+            controller.setSelectedReceiver(selectedReceiver);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+            loadReceiverList();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

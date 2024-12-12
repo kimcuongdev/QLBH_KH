@@ -7,12 +7,13 @@ public class Receiver {
     private String address_detail;
     private String operation;
     private String phone_number;
-
-    public Receiver(int receiver_id, String name, String address, String phone_number){
+    private String email;
+    public Receiver(int receiver_id, String name, String address, String phone_number, String email){
         this.receiver_id = receiver_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
+        this.email = email;
     }
 
     public int getReceiver_id() {
@@ -61,5 +62,11 @@ public class Receiver {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
