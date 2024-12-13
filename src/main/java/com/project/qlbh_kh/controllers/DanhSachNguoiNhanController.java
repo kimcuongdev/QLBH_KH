@@ -138,7 +138,7 @@ public class    DanhSachNguoiNhanController implements  Initializable{
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
-            loadReceiverList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

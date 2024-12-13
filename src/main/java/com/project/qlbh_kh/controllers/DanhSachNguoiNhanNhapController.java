@@ -71,5 +71,20 @@ public class DanhSachNguoiNhanNhapController extends DanhSachNguoiNhanController
         Receivers.clear();
         loadReceiverList();
     }
+    public void modifyReceiver(Receiver selectedReceiver) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ChinhSuaNguoiNhanNhap.fxml"));
+            Scene scene = new Scene(loader.load());
+            ChinhSuaNguoiNhanNhapController controller = loader.getController();
+            controller.setSelectedReceiver(selectedReceiver);
+            controller.setMainController(this);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -112,6 +112,7 @@ public class DanhSachNguoiNhanXuatController extends DanhSachNguoiNhanController
             Scene scene = new Scene(loader.load());
             ChinhSuaNguoiNhanXuatController controller = loader.getController();
             controller.setSelectedReceiver(selectedReceiver);
+            controller.setMainController(this);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);

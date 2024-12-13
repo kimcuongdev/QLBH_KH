@@ -27,20 +27,25 @@ public class ChinhSuaNguoiNhanXuatController {
     private DanhSachNguoiNhanController mainController;
     private Receiver selectedReceiver;
 
+    public void setMainController(DanhSachNguoiNhanController mainController) {
+        this.mainController = mainController;
+    }
     public void setSelectedReceiver(Receiver selectedReceiver) {
+
         this.selectedReceiver = selectedReceiver;
         oldAddress.setText(selectedReceiver.getAddress());
         oldEmail.setText(selectedReceiver.getEmail());
         oldPhoneNumber.setText(selectedReceiver.getPhone_number());
-        newAddress.requestFocus();
+        newPhoneNumber.requestFocus();
     }
     public void modifyDatabase() {
+
         String newAddressValue = newAddress.getText().trim();
         String newEmailValue = newEmail.getText().trim();
         String newPhoneNumberValue = newPhoneNumber.getText().trim();
         try {
             Connection connection = JDBCUtil.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE receivers_out_tb SET address = ?, email = ?, phone_number = ? WHERE receiver_out_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE receivers_out_tb SET address = ?, email = ?, phone_number = ? WHERE receivers_out_id = ?");
             preparedStatement.setString(1, newAddressValue.isEmpty() ? selectedReceiver.getAddress() : newAddressValue);
             preparedStatement.setString(2, newEmailValue.isEmpty() ? selectedReceiver.getEmail() : newEmailValue);
             preparedStatement.setString(3, newPhoneNumberValue.isEmpty() ? selectedReceiver.getPhone_number() : newPhoneNumberValue);
@@ -57,9 +62,11 @@ public class ChinhSuaNguoiNhanXuatController {
                         confirmButton.getScene().getWindow().hide();
                     }
                 });
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.mainController.loadReceiverList();
     }
 }

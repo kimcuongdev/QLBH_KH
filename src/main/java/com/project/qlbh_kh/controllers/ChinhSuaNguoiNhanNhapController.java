@@ -27,13 +27,15 @@ public class ChinhSuaNguoiNhanNhapController {
     private Button confirmButton;
     private DanhSachNguoiNhanNhapController mainController;
     private Receiver selectedReceiver;
-
+    public void setMainController(DanhSachNguoiNhanNhapController mainController) {
+        this.mainController = mainController;
+    }
     public void setSelectedReceiver(Receiver selectedReceiver) {
         this.selectedReceiver = selectedReceiver;
         oldAddress.setText(selectedReceiver.getAddress());
         oldEmail.setText(selectedReceiver.getEmail());
         oldPhoneNumber.setText(selectedReceiver.getPhone_number());
-        newAddress.requestFocus();
+        newPhoneNumber.requestFocus();
     }
 
     @FXML
@@ -67,5 +69,6 @@ public class ChinhSuaNguoiNhanNhapController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.mainController.loadReceiverList();
     }
 }
