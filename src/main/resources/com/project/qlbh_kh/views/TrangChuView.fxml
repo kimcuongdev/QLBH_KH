@@ -38,7 +38,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý khách mua" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="customerOutManageButton" text="Quản lý khách mua" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
@@ -65,7 +65,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalProduct">
+                  <Label fx:id="totalProduct" text="totalProduct">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -79,7 +79,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalCustomerOut">
+                  <Label fx:id="totalCustomerOut" text="totalCustomerOut">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -93,7 +93,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalCustomerIn">
+                  <Label fx:id="totalCustomerIn" text="totalCustomerIn">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalReceiverOut">
+                  <Label fx:id="totalReceiverOut" text="totalReceiverOut">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -121,7 +121,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalReceiverIn">
+                  <Label fx:id="totalReceiverIn" text="totalReceiverIn">
                      <font>
                         <Font size="20.0" />
                      </font>

@@ -7,12 +7,20 @@ public class Customer {
     private String address_detail;
     private String operation;
     private String phone_number;
-
+    private String email;
     public Customer(int customer_id, String name, String address, String phone_number){
         this.customer_id = customer_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
+    }
+    public Customer(int customer_id, String name, String address, String phone_number, String email)
+    {
+        this.customer_id = customer_id;
+        this.name = name;
+        this.address = address;
+        this.phone_number = phone_number;
+        this.email = email;
     }
 
     public int getCustomer_id() {
@@ -61,5 +69,9 @@ public class Customer {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public String getEmail() {
+        return  this.email;
     }
 }
