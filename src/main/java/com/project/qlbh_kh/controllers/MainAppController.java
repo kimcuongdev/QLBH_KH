@@ -56,7 +56,7 @@ public class MainAppController implements Initializable {
                 else if (selectedItem == hangNhap) loadContent("/com/project/qlbh_kh/views/quanLyHangNhapView.fxml");
                 else if (selectedItem == hangXuat) loadContent("/com/project/qlbh_kh/views/quanLyHangXuatView.fxml");
                 else if (selectedItem == kiemKho) loadContent("/com/project/qlbh_kh/views/kiemKhoView.fxml");
-                else loadContent("/com/project/qlbh_kh/views/truyXuatKhoView.fxml");
+                else if (selectedItem == truyXuatKho) loadContent("/com/project/qlbh_kh/views/truyXuatKhoView.fxml");
 
             }catch (Exception e)
             {

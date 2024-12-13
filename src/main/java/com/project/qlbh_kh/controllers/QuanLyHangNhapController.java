@@ -34,6 +34,8 @@ public class QuanLyHangNhapController extends BasicController {
     ObservableList<Product_manager> data = FXCollections.observableArrayList();
     @FXML public void resetCustomer() {this.customerNameField.clear(); this.selectedCustomerId = 0;}
     @FXML public void resetProduct() {this.productField.clear(); this.selectedProductId = 0;}
+    @FXML public void resetFromDate() {this.fromDate.setValue(null); this.fromDateValue = null;}
+    @FXML public void resetToDate() {this.toDate.setValue(null); this.toDateValue = null;}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {

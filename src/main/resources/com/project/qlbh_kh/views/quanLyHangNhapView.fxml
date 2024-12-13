@@ -7,78 +7,94 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyHangNhapController">
-   <top>
-      <GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" BorderPane.alignment="CENTER">
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyHangNhapController">
+   <children>
+      <GridPane hgap="10.0" vgap="10.0">
          <columnConstraints>
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
          </rowConstraints>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
          <children>
-            <Label alignment="CENTER" text="Khách hàng">
+            <Label text="Khách hàng">
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label alignment="CENTER" text="Từ ngày" GridPane.rowIndex="1">
+               </font>
+            </Label>
+            <TextField fx:id="customerNameField" onMouseClicked="#openCustomerInList" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" onMouseClicked="#resetCustomer" text="Chọn lại" GridPane.columnIndex="2" />
+            <Label text="Mặt hàng" GridPane.columnIndex="3">
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label contentDisplay="CENTER" text="Mặt hàng" GridPane.columnIndex="2">
+               </font>
+            </Label>
+            <TextField fx:id="productField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#openProductNameList" GridPane.columnIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" onMouseClicked="#resetProduct" text="Chọn lại" GridPane.columnIndex="5" />
+            <Label text="Đến ngày" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label text="Đến ngày" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               </font>
+            </Label>
+            <Label text="Từ ngày" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <DatePicker fx:id="fromDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterFromDate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <DatePicker fx:id="toDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterToDate" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <Button fx:id="execute" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#executeQuery" text="Thực hiện truy vấn" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               </font>
+            </Label>
+            <DatePicker fx:id="fromDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterFromDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="toDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterToDate" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetToDate" text="Chọn lại" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetFromDate" text="Chọn lại" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Quản lý hàng nhập" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="execute" mnemonicParsing="false" onAction="#executeQuery" text="Thực hiện truy vấn" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
-               </font></Button>
-            <Label text="Quản lý hàng nhập" GridPane.rowIndex="2">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <TextField GridPane.columnIndex="1" />
-            <TextField fx:id="customerNameField" onMouseClicked="#openCustomerInList" GridPane.columnIndex="1" />
-            <TextField fx:id="productField" onMouseClicked="#openProductNameList" GridPane.columnIndex="3" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#resetCustomer" text="Chọn tất cả khách hàng" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#resetProduct" text="Chọn tất cả mặt hàng" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </font>
+            </Button>
          </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
       </GridPane>
-   </top>
-   <center>
-      <TableView fx:id="tableView" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="47.0" text="Mã HĐ" />
-            <TableColumn fx:id="customerNameColumn" prefWidth="111.0" text="Khách hàng" />
-            <TableColumn fx:id="prodNameColumn" prefWidth="117.0" text="Mặt hàng" />
-            <TableColumn fx:id="quantityColumn" prefWidth="58.0" text="Số lượng" />
-            <TableColumn fx:id="unitPriceColumn" prefWidth="59.0" text="Đơn giá" />
-            <TableColumn fx:id="totalAmountColumn" prefWidth="99.0" text="Thành tiền" />
-            <TableColumn fx:id="dateColumn" prefWidth="108.0" text="Ngày" />
+            <TableColumn fx:id="idColumn" prefWidth="75.0" text="Mã HĐ" />
+            <TableColumn fx:id="customerNameColumn" prefWidth="75.0" text="Khách hàng" />
+            <TableColumn fx:id="prodNameColumn" prefWidth="75.0" text="Mặt hàng" />
+            <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Số lượng" />
+            <TableColumn fx:id="unitPriceColumn" prefWidth="75.0" text="Đơn giá" />
+            <TableColumn fx:id="totalAmountColumn" prefWidth="75.0" text="Thành tiền" />
+            <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Ngày" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-   </center>
-</BorderPane>
+   </children>
+</VBox>

@@ -43,7 +43,7 @@ public class QuanLyMatHangController implements Initializable {
         //them su kien chinh sua mat hang cho tableview
         tableView.setOnMouseClicked(mouseEvent -> {
             Product selectedProduct = tableView.getSelectionModel().getSelectedItem();
-            modifyProduct(selectedProduct);
+            if(selectedProduct != null) modifyProduct(selectedProduct);
         });
         //loc san pham trong tableview khi tuong tac voi searchfield
         searchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {

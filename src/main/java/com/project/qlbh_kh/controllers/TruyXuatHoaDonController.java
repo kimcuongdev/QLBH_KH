@@ -30,6 +30,11 @@ public class TruyXuatHoaDonController extends BasicController {
     @FXML private TableColumn<Order_manager,String> dateColumn;
     @FXML private TableColumn<Order_manager,String> operationColumn;
     ObservableList<Order_manager> data = FXCollections.observableArrayList();
+    @FXML public void resetCustomer() {this.customerNameField.clear(); this.selectedCustomerId = 0;}
+    @FXML public void resetFromDate() {this.fromDate.setValue(null); this.fromDateValue = null;}
+    @FXML public void resetToDate() {this.toDate.setValue(null); this.toDateValue = null;}
+    @FXML public void resetReceiver() {this.receiverNameField.clear(); this.selectedReceiverId = 0;}
+    @FXML public void resetOperation() {this.operationBox.setValue(null); this.operation = null;}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
