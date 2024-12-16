@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyHangXuatController">
    <children>
       <GridPane hgap="10.0" vgap="10.0">
@@ -91,6 +90,7 @@
             <TableColumn fx:id="unitPriceColumn" prefWidth="75.0" text="Đơn giá" />
             <TableColumn fx:id="totalAmountColumn" prefWidth="75.0" text="Thành tiền" />
             <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Ngày" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Trạng thái" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -7,7 +7,8 @@ public class Order_manager {
     private String receiver_name;
     private String date;
     private String operation;
-    public Order_manager(int id, String customer_name, double total_payment, String receiver_name, String date, String operation)
+    private String status;
+    public Order_manager(int id, String customer_name, double total_payment, String receiver_name, String date, String operation, String status)
     {
         this.id = id;
         this.customer_name = customer_name;
@@ -15,7 +16,13 @@ public class Order_manager {
         this.receiver_name = receiver_name;
         this.date = date;
         this.operation = operation;
+        this.status = status;
     }
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
+
     public String getDate() {
         return date;
     }

@@ -167,7 +167,7 @@ public class BasicController implements Initializable {
             orderStage.initModality(Modality.APPLICATION_MODAL);
             //orderStage.initOwner();
             orderStage.setTitle("Hien thi hoa don");
-            orderStage.setScene(new Scene(root));
+            orderStage.setScene(new Scene(root, 845, 592));
             orderStage.show();
         } catch (Exception e)
         {

@@ -6,14 +6,19 @@ public class Stock_manager {
     private int quantity;
     private String date;
     private String operation;
-
-    public Stock_manager(int orderId, String item, int quantity, String date, String operation) {
+    private String status;
+    public Stock_manager(int orderId, String item, int quantity, String date, String operation, String status) {
         this.orderId = orderId;
         this.product = item;
         this.quantity = quantity;
         this.date = date;
         this.operation = operation;
+        this.status = status;
     }
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
 
     // Getters and setters
     public int getOrderId() { return orderId; }

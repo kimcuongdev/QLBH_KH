@@ -22,6 +22,7 @@ public class TruyXuatKhoController extends BasicController {
     @FXML private TableColumn<Stock_manager, Integer> quantityColumn;
     @FXML private TableColumn<Stock_manager, String> dateColumn;
     @FXML private TableColumn<Stock_manager, String> operationColumn;
+    @FXML private TableColumn<Stock_manager, String> statusColumn;
     ObservableList<Stock_manager> data = FXCollections.observableArrayList();
     @FXML
     public void reset()
@@ -44,6 +45,7 @@ public class TruyXuatKhoController extends BasicController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         operationColumn.setCellValueFactory(new PropertyValueFactory<>("operation"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         String query = "{call dbo.Product_all}";
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -54,7 +56,8 @@ public class TruyXuatKhoController extends BasicController {
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getString(5)
+                        rs.getString(5),
+                        (rs.getInt(7) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
@@ -96,7 +99,8 @@ public class TruyXuatKhoController extends BasicController {
                             resultSet.getString(2),
                             resultSet.getInt(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            (resultSet.getInt(7) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
                 tableView.setItems(data);
@@ -123,7 +127,8 @@ public class TruyXuatKhoController extends BasicController {
                             resultSet.getString(2),
                             resultSet.getInt(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            (resultSet.getInt(7) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
                 tableView.setItems(data);
@@ -150,7 +155,8 @@ public class TruyXuatKhoController extends BasicController {
                             resultSet.getString(2),
                             resultSet.getInt(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            (resultSet.getInt(7) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
                 tableView.setItems(data);

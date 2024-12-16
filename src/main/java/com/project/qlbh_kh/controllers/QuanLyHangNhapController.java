@@ -31,6 +31,7 @@ public class QuanLyHangNhapController extends BasicController {
     @FXML private TableColumn<Product_manager,Integer> unitPriceColumn;
     @FXML private TableColumn<Product_manager,Integer> totalAmountColumn;
     @FXML private TableColumn<Product_manager,String> dateColumn;
+    @FXML private TableColumn<Product_manager, String> statusColumn;
     ObservableList<Product_manager> data = FXCollections.observableArrayList();
     @FXML public void resetCustomer() {this.customerNameField.clear(); this.selectedCustomerId = 0;}
     @FXML public void resetProduct() {this.productField.clear(); this.selectedProductId = 0;}
@@ -48,6 +49,7 @@ public class QuanLyHangNhapController extends BasicController {
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unit_price"));
         totalAmountColumn.setCellValueFactory(new PropertyValueFactory<>("total_amount"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         try
         {
             Connection connection = JDBCUtil.getConnection();
@@ -66,7 +68,8 @@ public class QuanLyHangNhapController extends BasicController {
                         resultSet.getInt(4),
                         resultSet.getDouble(5),
                         resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        (resultSet.getInt(9) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
@@ -106,7 +109,8 @@ public class QuanLyHangNhapController extends BasicController {
                         resultSet.getInt(4),
                         resultSet.getDouble(5),
                         resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        (resultSet.getInt(9) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
