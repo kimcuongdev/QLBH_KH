@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyKhachMuaController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyKhachMuaController">
    <children>
       <Label alignment="TOP_CENTER" text="Quản lý khách mua">
          <font>
@@ -34,6 +34,8 @@
                 <TableColumn fx:id="addressColumn" prefWidth="90.0" text="Địa chỉ" />
                   <TableColumn fx:id="phoneNumberColumn" prefWidth="75.0" text="Số điện thoại" />
                   <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="paidPaymentColumn" prefWidth="75.0" text="Tổng tiền đã thanh toán" />
+                  <TableColumn fx:id="unpaidPaymentColumn" prefWidth="75.0" text="Tổng tiền chưa thanh toán" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
