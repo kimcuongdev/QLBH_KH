@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ChinhSuaKhachHangController {
+public class ChinhSuaNhaCungCapController {
     @FXML private TextField oldPhoneNumber;
     @FXML private TextField newPhoneNumber;
     @FXML private TextField oldAddress;
@@ -18,11 +18,11 @@ public class ChinhSuaKhachHangController {
     @FXML private TextField newEmail;
     @FXML private Label customerNameLabel;
     @FXML private Button confirmButton;
-    private QuanLyKhachMuaController mainController;
+    private QuanLyNhaCungCapController mainController;
     private Customer selectedCustomer;
-    public void setMainController(QuanLyKhachMuaController quanLyKhachMuaController)
+    public void setMainController(QuanLyNhaCungCapController quanLyNhaCungCapController)
     {
-        this.mainController = quanLyKhachMuaController;
+        this.mainController = quanLyNhaCungCapController;
     }
     public void setSelectedCustomer(Customer selectedCustomer)
     {
@@ -46,7 +46,7 @@ public class ChinhSuaKhachHangController {
             String address = newAddressValue.isEmpty() ? selectedCustomer.getAddress() : (newAddressValue);
             String email = newEmailValue.isEmpty() ? selectedCustomer.getEmail() : (newEmailValue);
             Connection connection = JDBCUtil.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customers_out_tb SET phone_number = ?, address = ?, email = ? WHERE customer_out_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customers_in_tb SET phone_number = ?, address = ?, email = ? WHERE customer_in_id = ?");
             preparedStatement.setString(1, phoneNumber);
             preparedStatement.setString(2, address);
             preparedStatement.setString(3, email);
@@ -56,14 +56,14 @@ public class ChinhSuaKhachHangController {
                 // Thông báo thành công
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Thành công");
-                alert.setContentText("Đã cập nhật thông tin khách hàng thành công!");
+                alert.setContentText("Đã cập nhật thông tin nhà cung cấp thành công!");
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         // Đóng cửa sổ chỉnh sửa
                         confirmButton.getScene().getWindow().hide();
                         // Gọi phương thức cập nhật danh sách trong mainController
                         if (mainController != null) {
-                            mainController.openCustomerOutList();
+                            mainController.openCustomerInList();
                         }
                     }
                 });

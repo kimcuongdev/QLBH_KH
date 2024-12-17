@@ -22,24 +22,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-public class QuanLyKhachMuaController implements Initializable {
+public class QuanLyNhaCungCapController implements Initializable {
     @FXML private TextField searchField;
     @FXML private TableView<Customer> tableView; //tableView lưu customerOut
-    @FXML private TableColumn<Customer,String> customerOutNameColumn; //tableColumn luu thuoc tinh customerOutName co kieu du lieu la String
+    @FXML private TableColumn<Customer,String> customerInNameColumn; //tableColumn luu thuoc tinh customerOutName co kieu du lieu la String
     @FXML private TableColumn<Customer,String> addressColumn;
     @FXML private TableColumn<Customer,String> phoneNumberColumn;
     @FXML private TableColumn<Customer,String> emailColumn;
     @FXML private TableColumn<Customer, Double> paidPaymentColumn;
     @FXML private TableColumn<Customer, Double> unpaidPaymentColumn;
-    @FXML private Button addNewCustomerOutButton;
+    @FXML private Button addNewCustomerInButton;
     @FXML private Button reloadTableButton;
-    private ObservableList<Customer> customerOutList = FXCollections.observableArrayList(); //observablelist de luu nhung doi tuong duoc hien thi trong tableview
+    private ObservableList<Customer> customerInList = FXCollections.observableArrayList(); //observablelist de luu nhung doi tuong duoc hien thi trong tableview
     
     @Override
     //phuong thuong initialize se duoc goi de set up cac doi tuong trong scene truoc khi hien thi tren man hinh
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //thiet lap thuoc tinh cho cac cot, dung ten thuoc tinh cua lop product
-        customerOutNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerInNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -53,15 +53,15 @@ public class QuanLyKhachMuaController implements Initializable {
         });
         //loc san pham trong tableview khi tuong tac voi searchfield
         searchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
-            tableView.setItems(customerOutList.filtered(Customer -> {
+            tableView.setItems(customerInList.filtered(Customer -> {
                 return Customer.getName().toLowerCase().contains(newValue.toLowerCase());
             }));
         }));
         //hien thi tat ca mat hang
-        openCustomerOutList();
+        openCustomerInList();
     }
     @FXML
-    public void openCustomerOutList()
+    public void openCustomerInList()
     {
         //clear searchfield
         searchField.clear();
@@ -70,15 +70,15 @@ public class QuanLyKhachMuaController implements Initializable {
             //connect voi sqlsever
             Connection connection = JDBCUtil.getConnection();
             //nhap truy van
-            PreparedStatement preparedStatement = connection.prepareStatement("exec customers_out_list");
+            PreparedStatement preparedStatement = connection.prepareStatement("exec customers_in_list");
             //thuc hien truy van
             ResultSet resultSet = preparedStatement.executeQuery();
             //clear productlist de tranh lap lai
-            customerOutList.clear();
+            customerInList.clear();
             //lay cac ban ghi trong truy van sql
             while(resultSet.next())
             {
-                customerOutList.add(new Customer(
+                customerInList.add(new Customer(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
@@ -89,7 +89,7 @@ public class QuanLyKhachMuaController implements Initializable {
                 ));
             }
             //hien thi len tableview
-            tableView.setItems(customerOutList);
+            tableView.setItems(customerInList);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -97,24 +97,24 @@ public class QuanLyKhachMuaController implements Initializable {
     }
     //mo cua so phu de them mat hang moi
     @FXML
-    public void addNewCustomerOut()
+    public void addNewCustomerIn()
     {
         System.out.println("addnew");
         try
         {
             //load scence them mat hang
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemKhachMuaMoiView.fxml"));
-            Scene addNewCustomerOutScene = new Scene(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemNhaCungCapMoiView.fxml"));
+            Scene addNewCustomerInScene = new Scene(fxmlLoader.load());
             //set controller cha cho scene moi
-            ThemKhachMuaMoiController themKhachMuaMoiController = fxmlLoader.getController();
-            themKhachMuaMoiController.setMainController(this);
+            ThemNhaCungCapMoiController themNhaCungCapMoiController = fxmlLoader.getController();
+            themNhaCungCapMoiController.setMainController(this);
             //tao stage moi
             Stage addNewProductStage = new Stage();
             //modal: phai dong cua so con neu muon thao tac cua so cha
             addNewProductStage.initModality(Modality.APPLICATION_MODAL);
-            addNewProductStage.initOwner(addNewCustomerOutButton.getScene().getWindow());
-            addNewProductStage.setTitle("Them khach hang moi");
-            addNewProductStage.setScene(addNewCustomerOutScene);
+            addNewProductStage.initOwner(addNewCustomerInButton.getScene().getWindow());
+            addNewProductStage.setTitle("Them nha cung cap moi");
+            addNewProductStage.setScene(addNewCustomerInScene);
             //show
             addNewProductStage.show();
         }catch (Exception e)
@@ -128,15 +128,15 @@ public class QuanLyKhachMuaController implements Initializable {
         System.out.println("modify");
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ChinhSuaKhachHangView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ChinhSuaNhaCungCapView.fxml"));
             Scene modifyProductScene = new Scene(fxmlLoader.load());
-            ChinhSuaKhachMuaController chinhSuaKhachMuaController = fxmlLoader.getController();
-            chinhSuaKhachMuaController.setMainController(this);
-            chinhSuaKhachMuaController.setSelectedCustomer(selectedCustomer);
+            ChinhSuaNhaCungCapController chinhSuaNhaCungCapController = fxmlLoader.getController();
+            chinhSuaNhaCungCapController.setMainController(this);
+            chinhSuaNhaCungCapController.setSelectedCustomer(selectedCustomer);
             Stage modifyProductStage = new Stage();
             modifyProductStage.initModality(Modality.APPLICATION_MODAL);
             modifyProductStage.initOwner(tableView.getScene().getWindow());
-            modifyProductStage.setTitle("Chinh sua khach hang: ");
+            modifyProductStage.setTitle("Chinh sua nha cung cap: ");
             modifyProductStage.setScene(modifyProductScene);
             modifyProductStage.show();
         } catch (Exception e)
