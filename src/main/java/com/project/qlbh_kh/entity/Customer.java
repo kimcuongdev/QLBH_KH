@@ -8,19 +8,24 @@ public class Customer {
     private String operation;
     private String phone_number;
     private String email;
+    private Double paid_payment;
+    private Double unpaid_payment;
+    
     public Customer(int customer_id, String name, String address, String phone_number){
         this.customer_id = customer_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
     }
-    public Customer(int customer_id, String name, String address, String phone_number, String email)
+    public Customer(int customer_id, String name, String address, String phone_number, String email, Double paid_payment, Double unpaid_payment)
     {
         this.customer_id = customer_id;
         this.name = name;
         this.address = address;
         this.phone_number = phone_number;
         this.email = email;
+        this.paid_payment = paid_payment;
+        this.unpaid_payment = unpaid_payment;
     }
 
     public int getCustomer_id() {
@@ -74,4 +79,22 @@ public class Customer {
     public String getEmail() {
         return  this.email;
     }
+    
+    public void setPaid_payment(Double paid_payment){
+        this.paid_payment = paid_payment;
+    }
+    
+    public Double getPaid_payment(){
+        return paid_payment;
+    }
+    
+    public void setUnpaid_payment(Double unpaid_payment){
+        this.unpaid_payment = unpaid_payment;
+    }
+    
+    public Double getUnpaid_payment(){
+        return unpaid_payment;
+    }
+    
+    
 }

@@ -29,9 +29,12 @@ public class QuanLyKhachMuaController implements Initializable {
     @FXML private TableColumn<Customer,String> addressColumn;
     @FXML private TableColumn<Customer,String> phoneNumberColumn;
     @FXML private TableColumn<Customer,String> emailColumn;
+    @FXML private TableColumn<Customer, Double> paidPaymentColumn;
+    @FXML private TableColumn<Customer, Double> unpaidPaymentColumn;
     @FXML private Button addNewCustomerOutButton;
     @FXML private Button reloadTableButton;
     private ObservableList<Customer> customerOutList = FXCollections.observableArrayList(); //observablelist de luu nhung doi tuong duoc hien thi trong tableview
+    
     @Override
     //phuong thuong initialize se duoc goi de set up cac doi tuong trong scene truoc khi hien thi tren man hinh
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,6 +43,9 @@ public class QuanLyKhachMuaController implements Initializable {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        paidPaymentColumn.setCellValueFactory(new PropertyValueFactory<>("paid_payment"));
+        unpaidPaymentColumn.setCellValueFactory(new PropertyValueFactory<>("unpaid_payment"));
+        
         //them su kien chinh sua mat hang cho tableview
         tableView.setOnMouseClicked(mouseEvent -> {
             Customer selectedCustomer = tableView.getSelectionModel().getSelectedItem();
@@ -77,7 +83,9 @@ public class QuanLyKhachMuaController implements Initializable {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        (resultSet.getString(5) == null || resultSet.getString(5).equals("")) ? "Không có email" : resultSet.getString(5)
+                        (resultSet.getString(5) == null || resultSet.getString(5).equals("")) ? "Không có email" : resultSet.getString(5),
+                        resultSet.getDouble(6),
+                        resultSet.getDouble(7)
                 ));
             }
             //hien thi len tableview
