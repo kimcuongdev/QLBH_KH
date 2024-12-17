@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TrangChuController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TrangChuController">
    <children>
       <Label text="Quản lý Kho Hàng - Bán Hàng">
          <font>
@@ -48,12 +48,12 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button  fx:id="receiverOutManageButton" text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý vận chuyển mua vào" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Button fx:id="receiverInManageButton" text="Quản lý vận chuyển mua vào" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>

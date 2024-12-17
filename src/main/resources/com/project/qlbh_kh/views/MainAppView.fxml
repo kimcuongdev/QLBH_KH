@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="mainBorderPane" prefHeight="586.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.MainAppController">
+<BorderPane fx:id="mainBorderPane" prefHeight="586.0" prefWidth="744.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.MainAppController">
    <left>
       <TreeView fx:id="treeView" prefHeight="586.0" prefWidth="171.0" />
    </left>

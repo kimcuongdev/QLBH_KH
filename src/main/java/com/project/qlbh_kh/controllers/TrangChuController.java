@@ -1,17 +1,14 @@
 package com.project.qlbh_kh.controllers;
-
 import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ResourceBundle;
 
-public class TrangChuController  {
+public class TrangChuController {
     private MainAppController mainAppController;
     @FXML private Label totalProduct;
     @FXML private Label totalCustomerOut;
@@ -21,6 +18,11 @@ public class TrangChuController  {
     @FXML private Button customerOutManageButton;
     @FXML private Button productManageButton;
 
+    @FXML
+    private Button receiverInManageButton;
+
+    @FXML
+    private Button receiverOutManageButton;
     public void setTotalProduct(int totalProduct) { this.totalProduct.setText(String.valueOf(totalProduct)); }
 
     public void setTotalCustomerOut(int totalCustomerOut) { this.totalCustomerOut.setText(String.valueOf(totalCustomerOut)); }
@@ -30,11 +32,9 @@ public class TrangChuController  {
     public void setTotalReceiverOut(int totalReceiverOut) { this.totalReceiverOut.setText(String.valueOf(totalReceiverOut)); }
 
     public void setTotalReceiverIn(int totalReceiverIn) { this.totalReceiverIn.setText(String.valueOf(totalReceiverIn)); }
-
     public void setMainAppController(MainAppController mainAppController) {
         this.mainAppController = mainAppController;
     }
-
     @FXML
     private void initialize() {
         try
@@ -63,6 +63,24 @@ public class TrangChuController  {
                 }
             }
         });
+        receiverInManageButton.setOnAction(event -> {
+            if (mainAppController != null) {
+                try {
+                    mainAppController.loadContent("/com/project/qlbh_kh/views/QuanLyNguoiNhanInView.fxml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        receiverOutManageButton.setOnAction(event -> {
+            if (mainAppController != null) {
+                try {
+                    mainAppController.loadContent("/com/project/qlbh_kh/views/QuanLyNguoiNhanOutView.fxml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         customerOutManageButton.setOnAction(event -> {
             if (mainAppController != null) {
                 try {
@@ -75,5 +93,3 @@ public class TrangChuController  {
     }
 
 }
-
-

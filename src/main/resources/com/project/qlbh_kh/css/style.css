@@ -1,0 +1,155 @@
+/* TreeView */
+.tree-view {
+    -fx-background-color: #CCEBFF; /* Màu nền sáng xanh dương nhạt */
+    -fx-border-color: #3399FF; /* Màu viền xanh dương nhạt */
+    -fx-border-width: 2px;
+    -fx-font-size: 14px;
+}
+
+/* StackPane */
+.stack-pane {
+    -fx-background-color: #FFFFFF; /* Màu nền trắng */
+    -fx-padding: 10px;
+}
+
+/* Định dạng cho Label */
+.label {
+    -fx-text-fill: #004080; /* Xanh đậm nổi bật */
+    -fx-padding: 5px 10px;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-background-size: 20px 20px; /* Kích thước ảnh */
+    -fx-background-repeat: no-repeat; /* Không lặp lại ảnh */
+    -fx-background-position: left center; /* Canh vị trí ảnh */
+    -fx-padding: 5px 0 5px 30px; /* Chỉnh khoảng cách chữ lệch ra ảnh */
+}
+
+
+
+/* Button */
+.button {
+    -fx-background-color: #0066CC; /* Xanh đậm */
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+    -fx-font-size: 18px;
+    -fx-padding: 8px 15px;
+}
+
+.search-field {
+    -fx-font-size: 18px;
+}
+
+.button:hover {
+    -fx-background-color: #004080; /* Đậm hơn khi hover */
+}
+
+/* TextField */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #0066CC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: black;
+}
+
+.text-field:focused {
+    -fx-border-color: #004080;
+    -fx-border-width: 2px;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #0066CC;
+    -fx-border-radius: 5px;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #66B2FF; /* Nút mở lịch màu xanh nhạt */
+    -fx-background-radius: 5px;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #004080; /* Hover đậm hơn */
+}
+
+/* Calendar popup */
+.date-picker .cell {
+    -fx-background-color: #E6F7FF; /* Màu xanh nhạt cho ô trong calendar */
+    -fx-text-fill: black;
+}
+
+.date-picker .cell:hover {
+    -fx-background-color: #B3E0FF; /* Xanh nhạt hơn khi hover */
+}
+
+.date-picker .selected {
+    -fx-background-color: #0066CC; /* Màu xanh đậm cho ngày được chọn */
+    -fx-text-fill: white;
+}
+
+.date-picker .day-cell:hover {
+    -fx-background-color: #B3E0FF; /* Hover xanh nhạt */
+}
+
+.date-picker-popup .month-year-pane{
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+
+}
+
+/* TableView */
+.table-view {
+    -fx-font-size:18px;
+    -fx-background-color: white;
+    -fx-border-color: #0066CC;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #66B2FF;
+    -fx-text-fill: #004080;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: orange; /* Màu nền xanh dương nhạt khi chọn */
+    -fx-text-fill: white; /* Màu chữ trắng khi chọn */
+    -fx-font-weight: bold; /* Chữ in đậm */
+}
+
+/* TextArea */
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #0066CC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #0066CC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #66B2FF; /* Nút mở danh sách màu xanh nhạt */
+    -fx-background-radius: 5px;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #004080; /* Hover đậm hơn */
+}
+.image-view {
+    -fx-border-color: #0066CC;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px; /* Làm ảnh tròn */
+}
