@@ -10,13 +10,20 @@ public class Order_detail {
     private String email;
     private String phone_number;
     private double total_payment;
+    private String order_date;
     public Order_detail(String prod_name, int quantity, double unit_price, double total_amount)
     {
         this.prod_name = prod_name;
         this.quantity = quantity;
         this.unit_price = unit_price;
         this.total_amount = total_amount;
+        this.order_date = order_date;
     }
+
+    public String getOrder_date() {return order_date;}
+
+    public void setOrder_date(String order_date) {this.order_date = order_date;}
+
     public String getProd_name() {
         return prod_name;
     }

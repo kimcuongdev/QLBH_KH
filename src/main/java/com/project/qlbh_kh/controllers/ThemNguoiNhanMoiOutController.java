@@ -26,9 +26,9 @@ public class ThemNguoiNhanMoiOutController {
     @FXML
     private TextField receiverName;
 
-    private DanhSachNguoiNhanController mainController;
+    private QuanLyNguoiNhanOutController mainController;
 
-    public void setMainController(DanhSachNguoiNhanController quanLyNguoiNhanController)
+    public void setMainController(QuanLyNguoiNhanOutController quanLyNguoiNhanController)
     {
         this.mainController = quanLyNguoiNhanController;
     }

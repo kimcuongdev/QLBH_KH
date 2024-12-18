@@ -26,6 +26,7 @@ public class HienThiHoaDonController implements Initializable {
     @FXML private Label email;
     @FXML private Label receiverNameLabel;
     @FXML private Label totalPaymentLabel;
+    @FXML private Label dateLabel;
     @FXML private TableView<Order_detail> tableView;
     @FXML private TableColumn<Order_detail,String> productNameColumn;
     @FXML private TableColumn<Order_detail,Integer> quantityColumn;
@@ -36,6 +37,14 @@ public class HienThiHoaDonController implements Initializable {
     private int id;
     //public void setOperation(String operation) { this.operation = operation; orderTypeLabel.setText("Hóa đơn mua vào");}
     public void setId(int id) {this.id = id; }
+    public String formatDate(String inputDate)
+    {
+        String[] parts = inputDate.split("-");
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int day = Integer.parseInt(parts[2]);
+        return day + " tháng " + month + " năm " + year;
+    }
     public void setUpData(int id, String operation)
     {
         String sql;
@@ -76,6 +85,7 @@ public class HienThiHoaDonController implements Initializable {
                 else emailLabel.setText(resultSet.getString(8));
                 receiverNameLabel.setText(resultSet.getString(9));
                 totalPaymentLabel.setText(resultSet.getString(10));
+                dateLabel.setText(formatDate(resultSet.getString(11)));
             }
             while(resultSet.next())
             {

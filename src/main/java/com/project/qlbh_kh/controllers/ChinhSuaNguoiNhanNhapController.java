@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 public class ChinhSuaNguoiNhanNhapController {
     @FXML
     private TextField oldAddress;
@@ -25,9 +26,9 @@ public class ChinhSuaNguoiNhanNhapController {
     private Label receiverNameLabel;
     @FXML
     private Button confirmButton;
-    private DanhSachNguoiNhanNhapController mainController;
+    private QuanLyNguoiNhanInController mainController;
     private Receiver selectedReceiver;
-    public void setMainController(DanhSachNguoiNhanNhapController mainController) {
+    public void setMainController(QuanLyNguoiNhanInController mainController) {
         this.mainController = mainController;
     }
     public void setSelectedReceiver(Receiver selectedReceiver) {

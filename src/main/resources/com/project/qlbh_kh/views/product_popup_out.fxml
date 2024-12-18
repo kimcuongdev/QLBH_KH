@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.SanPhamPopUpXuat">
+<VBox stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.SanPhamPopUpXuat">
     <TextField fx:id="productNameField" promptText="Tên mặt hàng" />
     <TextField fx:id="productPriceField" promptText="Giá" />
     <Button onAction="#handleAddProduct" text="Thêm" />

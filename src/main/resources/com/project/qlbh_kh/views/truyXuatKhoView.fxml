@@ -8,78 +8,118 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TruyXuatKhoController">
-   <top>
-      <GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" BorderPane.alignment="CENTER">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TruyXuatKhoController">
+   <children>
+      <GridPane hgap="10.0" vgap="10.0">
          <columnConstraints>
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
          </rowConstraints>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
          <children>
-            <Label alignment="CENTER" text="Mặt hàng">
+            <Label text="Mặt hàng">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/product-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label alignment="CENTER" text="Từ ngày" GridPane.rowIndex="1">
+               </font>
+            </Label>
+            <TextField fx:id="productField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#openProductNameList" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" onMouseClicked="#resetProduct" text="Chọn lại" GridPane.columnIndex="2" />
+            <Label text="Đến ngày" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/calender-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label contentDisplay="CENTER" text="Thao tác" GridPane.columnIndex="2">
+               </font>
+            </Label>
+            <Label text="Từ ngày" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/calender-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <Label text="Đến ngày" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               </font>
+            </Label>
+            <DatePicker fx:id="fromDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterFromDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="toDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterToDate" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetToDate" text="Chọn lại" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetFromDate" text="Chọn lại" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Truy xuất kho" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
-               </font></Label>
-            <DatePicker fx:id="fromDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterFromDate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <DatePicker fx:id="toDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterToDate" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <Button fx:id="execute" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#executeQuery" text="Thực hiện truy vấn" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               </font>
+            </Label>
+            <Button fx:id="execute" mnemonicParsing="false" onAction="#executeQuery" text="Thực hiện truy vấn" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
-               </font></Button>
-            <Label text="Truy xuất kho" GridPane.rowIndex="2">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <ComboBox fx:id="operationBox" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <TextField fx:id="productField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#openProductNameList" GridPane.columnIndex="1" />
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#reset" text="Chọn tất cả mặt hàng" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="13.0" />
                </font>
             </Button>
+            <Label text="Thao tác" GridPane.columnIndex="3">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/choice-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="operationBox" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetOperation" text="Chọn lại" GridPane.columnIndex="5" />
          </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
       </GridPane>
-   </top>
-   <center>
-      <TableView fx:id="tableView" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="orderIdColumn" prefWidth="47.0" text="Mã HĐ" />
-            <TableColumn fx:id="productColumn" prefWidth="117.0" text="Mặt hàng" />
-            <TableColumn fx:id="quantityColumn" prefWidth="58.0" text="Số lượng" />
-            <TableColumn fx:id="dateColumn" prefWidth="110.0" text="Ngày" />
-            <TableColumn fx:id="operationColumn" prefWidth="147.0" text="Thao tác" />
+            <TableColumn fx:id="orderIdColumn" prefWidth="84.0" text="Mã HĐ" />
+            <TableColumn fx:id="productColumn" prefWidth="267.0" text="Mặt hàng" />
+            <TableColumn fx:id="quantityColumn" prefWidth="115.0" text="Số lượng" />
+            <TableColumn fx:id="dateColumn" prefWidth="132.0" text="Ngày" />
+            <TableColumn fx:id="operationColumn" prefWidth="75.0" text="Thao tác" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Trạng thái" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-   </center>
-</BorderPane>
+   </children>
+</VBox>

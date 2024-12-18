@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 public class ChinhSuaNguoiNhanXuatController {
     @FXML
     private TextField oldAddress;
@@ -24,14 +25,12 @@ public class ChinhSuaNguoiNhanXuatController {
     private Label receiverNameLabel;
     @FXML
     private Button confirmButton;
-    private DanhSachNguoiNhanController mainController;
+    private QuanLyNguoiNhanOutController mainController;
     private Receiver selectedReceiver;
-
-    public void setMainController(DanhSachNguoiNhanController mainController) {
+    public void setMainController(QuanLyNguoiNhanOutController mainController) {
         this.mainController = mainController;
     }
     public void setSelectedReceiver(Receiver selectedReceiver) {
-
         this.selectedReceiver = selectedReceiver;
         oldAddress.setText(selectedReceiver.getAddress());
         oldEmail.setText(selectedReceiver.getEmail());
@@ -39,7 +38,6 @@ public class ChinhSuaNguoiNhanXuatController {
         newPhoneNumber.requestFocus();
     }
     public void modifyDatabase() {
-
         String newAddressValue = newAddress.getText().trim();
         String newEmailValue = newEmail.getText().trim();
         String newPhoneNumberValue = newPhoneNumber.getText().trim();
@@ -62,7 +60,6 @@ public class ChinhSuaNguoiNhanXuatController {
                         confirmButton.getScene().getWindow().hide();
                     }
                 });
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

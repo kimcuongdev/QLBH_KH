@@ -15,6 +15,12 @@ public class Receiver {
         this.address = address;
         this.email = email;
     }
+    public Receiver(int receiver_id, String name, String address, String phone_number){
+        this.receiver_id = receiver_id;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.address = address;
+    }
 
     public int getReceiver_id() {
         return receiver_id;
@@ -63,10 +69,7 @@ public class Receiver {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

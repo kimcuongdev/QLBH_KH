@@ -29,7 +29,13 @@ public class TruyXuatHoaDonController extends BasicController {
     @FXML private TableColumn<Order_manager,String> receiverNameColumn;
     @FXML private TableColumn<Order_manager,String> dateColumn;
     @FXML private TableColumn<Order_manager,String> operationColumn;
+    @FXML private TableColumn<Order_manager,String> statusColumn;
     ObservableList<Order_manager> data = FXCollections.observableArrayList();
+    @FXML public void resetCustomer() {this.customerNameField.clear(); this.selectedCustomerId = 0;}
+    @FXML public void resetFromDate() {this.fromDate.setValue(null); this.fromDateValue = null;}
+    @FXML public void resetToDate() {this.toDate.setValue(null); this.toDateValue = null;}
+    @FXML public void resetReceiver() {this.receiverNameField.clear(); this.selectedReceiverId = 0;}
+    @FXML public void resetOperation() {this.operationBox.setValue(null); this.operation = null;}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -63,6 +69,7 @@ public class TruyXuatHoaDonController extends BasicController {
         receiverNameColumn.setCellValueFactory(new PropertyValueFactory<>("receiver_name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         operationColumn.setCellValueFactory(new PropertyValueFactory<>("operation"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         try
         {
             Connection connection = JDBCUtil.getConnection();
@@ -76,7 +83,8 @@ public class TruyXuatHoaDonController extends BasicController {
                         resultSet.getDouble(3),
                         resultSet.getString(4),
                         resultSet.getString(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        (resultSet.getInt(8) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
@@ -119,7 +127,8 @@ public class TruyXuatHoaDonController extends BasicController {
                             resultSet.getDouble(3),
                             resultSet.getString(4),
                             resultSet.getString(6),
-                            resultSet.getString(7)
+                            resultSet.getString(7),
+                            (resultSet.getInt(8) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
             } catch (Exception e)
@@ -147,7 +156,8 @@ public class TruyXuatHoaDonController extends BasicController {
                             resultSet.getDouble(3),
                             resultSet.getString(4),
                             resultSet.getString(6),
-                            resultSet.getString(7)
+                            resultSet.getString(7),
+                            (resultSet.getInt(8) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
             } catch (Exception e)
@@ -175,7 +185,8 @@ public class TruyXuatHoaDonController extends BasicController {
                             resultSet.getDouble(3),
                             resultSet.getString(4),
                             resultSet.getString(6),
-                            resultSet.getString(7)
+                            resultSet.getString(7),
+                            (resultSet.getInt(8) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                     ));
                 }
             } catch (Exception e)

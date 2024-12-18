@@ -8,7 +8,8 @@ public class Product_manager {
     private double unit_price;
     private double total_amount;
     private String date;
-    public Product_manager(int id, String customer_name, String prod_name, int quantity, double unit_price, double total_amount, String date)
+    private String status;
+    public Product_manager(int id, String customer_name, String prod_name, int quantity, double unit_price, double total_amount, String date, String status)
     {
         this.id = id;
         this.customer_name = customer_name;
@@ -17,7 +18,12 @@ public class Product_manager {
         this.unit_price = unit_price;
         this.total_amount = total_amount;
         this.date = date;
+        this.status = status;
     }
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
 
     public int getId() {
         return id;

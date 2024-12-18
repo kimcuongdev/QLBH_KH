@@ -38,12 +38,12 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý khách mua" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="customerOutManageButton" text="Quản lý khách mua" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý nhà cung cấp" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="customerInManageButton" text="Quản lý nhà cung cấp" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
@@ -60,12 +60,12 @@
             </Button>
             <HBox alignment="CENTER_LEFT" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <children>
-                  <Label text="Tổng số mặt hàng đang bán: ">
+                  <Label text="Tổng mặt hàng đang bán: ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalProduct">
+                  <Label fx:id="totalProduct" text="totalProduct">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -74,12 +74,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="175.0" GridPane.rowIndex="1">
                <children>
-                  <Label text="Tổng số khách mua hàng: ">
+                  <Label text="Tổng khách mua hàng: ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalCustomerOut">
+                  <Label fx:id="totalCustomerOut" text="totalCustomerOut">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -88,12 +88,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="2">
                <children>
-                  <Label text="Tổng số nhà cung cấp: ">
+                  <Label text="Tổng nhà cung cấp: ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalCustomerIn">
+                  <Label fx:id="totalCustomerIn" text="totalCustomerIn">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -102,12 +102,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="3">
                <children>
-                  <Label text="Tổng số người vận chuyển hàng xuất: ">
+                  <Label text="Tổng người vận chuyển bên mua: ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalReceiverOut">
+                  <Label fx:id="totalReceiverOut" text="totalReceiverOut">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -116,12 +116,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="4">
                <children>
-                  <Label text="Tổng số người vận chuyển hàng nhập: ">
+                  <Label text="Tổng người vận chuyển bên cung cấp: ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label text="totalReceiverIn">
+                  <Label fx:id="totalReceiverIn" text="totalReceiverIn">
                      <font>
                         <Font size="20.0" />
                      </font>

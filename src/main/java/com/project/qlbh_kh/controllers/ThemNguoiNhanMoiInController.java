@@ -12,24 +12,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ThemNguoiNhanMoiInController {
-    @FXML
-    private TextField address;
+    @FXML private TextField address;
 
-    @FXML
-    private Button confirmButton;
+    @FXML private Button confirmButton;
 
-    @FXML
-    private TextField phone;
+    @FXML private TextField phone;
 
-    @FXML
-    private TextField email;
+    @FXML private TextField email;
 
-    @FXML
-    private TextField receiverName;
+    @FXML private TextField receiverName;
 
-    private DanhSachNguoiNhanController mainController;
+    private QuanLyNguoiNhanInController mainController;
 
-    public void setMainController(DanhSachNguoiNhanController quanLyNguoiNhanController)
+    public void setMainController(QuanLyNguoiNhanInController quanLyNguoiNhanController)
     {
         this.mainController = quanLyNguoiNhanController;
     }
@@ -51,7 +46,6 @@ public class ThemNguoiNhanMoiInController {
             String lastName = "";
             for(int i = 1; i < receiverNameValue.length; i++)
                 lastName = lastName + receiverNameValue[i] + " ";
-            String addressValue = addressInput;
             String phoneValue = phoneInput;
             String emailValue = emailInput;
 
@@ -59,7 +53,7 @@ public class ThemNguoiNhanMoiInController {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO receivers_in_tb (firstname, lastname, address, phone_number, email) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, addressValue);
+            preparedStatement.setString(3, addressInput);
             preparedStatement.setString(4, phoneValue);
             preparedStatement.setString(5, emailValue);
 

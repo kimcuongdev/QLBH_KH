@@ -30,9 +30,12 @@ public class QuanLyHangXuatController extends BasicController {
     @FXML private TableColumn<Product_manager,Integer> unitPriceColumn;
     @FXML private TableColumn<Product_manager,Integer> totalAmountColumn;
     @FXML private TableColumn<Product_manager,String> dateColumn;
+    @FXML private TableColumn<Product_manager,String> statusColumn;
     ObservableList<Product_manager> data = FXCollections.observableArrayList();
     @FXML public void resetCustomer() {this.selectedCustomerId = 0; this.customerNameField.clear();}
     @FXML public void resetProduct() {this.selectedProductId = 0; this.productField.clear();}
+    @FXML public void resetFromDate() {this.fromDate.setValue(null); this.fromDateValue = null;}
+    @FXML public void resetToDate() {this.toDate.setValue(null); this.toDateValue = null;}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -45,6 +48,7 @@ public class QuanLyHangXuatController extends BasicController {
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unit_price"));
         totalAmountColumn.setCellValueFactory(new PropertyValueFactory<>("total_amount"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         try
         {
             Connection connection = JDBCUtil.getConnection();
@@ -63,7 +67,8 @@ public class QuanLyHangXuatController extends BasicController {
                         resultSet.getInt(4),
                         resultSet.getDouble(5),
                         resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        (resultSet.getInt(9) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
@@ -104,7 +109,8 @@ public class QuanLyHangXuatController extends BasicController {
                         resultSet.getInt(4),
                         resultSet.getDouble(5),
                         resultSet.getDouble(6),
-                        resultSet.getString(7)
+                        resultSet.getString(7),
+                        (resultSet.getInt(9) == 0) ? "Chưa thanh toán" : "Đã thanh toán"
                 ));
             }
             tableView.setItems(data);
