@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TrangChuController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TrangChuController">
    <children>
       <Label text="Quản lý Kho Hàng - Bán Hàng">
          <font>
@@ -43,12 +43,12 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button text="Quản lý nhà cung cấp" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="customerInManageButton" text="Quản lý nhà cung cấp" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button  fx:id="receiverOutManageButton" text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="receiverOutManageButton" text="Quản lý vận chuyển bán ra" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
@@ -60,7 +60,7 @@
             </Button>
             <HBox alignment="CENTER_LEFT" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <children>
-                  <Label text="Tổng số mặt hàng đang bán: ">
+                  <Label text="Tổng mặt hàng đang bán: ">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -74,7 +74,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="175.0" GridPane.rowIndex="1">
                <children>
-                  <Label text="Tổng số khách mua hàng: ">
+                  <Label text="Tổng khách mua hàng: ">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -88,7 +88,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="2">
                <children>
-                  <Label text="Tổng số nhà cung cấp: ">
+                  <Label text="Tổng nhà cung cấp: ">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -102,7 +102,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="3">
                <children>
-                  <Label text="Tổng số người vận chuyển hàng xuất: ">
+                  <Label text="Tổng người vận chuyển bên mua: ">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -116,7 +116,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="175.0" GridPane.rowIndex="4">
                <children>
-                  <Label text="Tổng số người vận chuyển hàng nhập: ">
+                  <Label text="Tổng người vận chuyển bên cung cấp: ">
                      <font>
                         <Font size="20.0" />
                      </font>

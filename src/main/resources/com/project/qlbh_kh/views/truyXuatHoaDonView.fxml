@@ -14,6 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <VBox minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TruyXuatHoaDonController">
    <children>
       <GridPane hgap="10.0" vgap="10.0">
@@ -32,6 +34,13 @@
          </rowConstraints>
          <children>
             <Label text="Khách hàng">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
                </font>
@@ -43,6 +52,13 @@
             </TextField>
             <Button mnemonicParsing="false" onMouseClicked="#resetCustomer" text="Chọn lại" GridPane.columnIndex="2" />
             <Label text="Người nhận" GridPane.columnIndex="3">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
                </font>
@@ -54,11 +70,25 @@
             </TextField>
             <Button mnemonicParsing="false" onMouseClicked="#resetReceiver" text="Chọn lại" GridPane.columnIndex="5" />
             <Label text="Đến ngày" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/calender-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
             <Label text="Từ ngày" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/calender-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
                </font>
@@ -68,6 +98,13 @@
             <Button mnemonicParsing="false" onMouseClicked="#resetToDate" text="Chọn lại" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onMouseClicked="#resetFromDate" text="Chọn lại" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="Thao tác" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/choice-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <font>
                   <Font size="20.0" />
                </font>

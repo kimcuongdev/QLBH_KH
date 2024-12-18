@@ -32,10 +32,10 @@
                <columns>
                   <TableColumn fx:id="customerOutNameColumn" prefWidth="116.0" text="Tên khách hàng" />
                   <TableColumn fx:id="addressColumn" prefWidth="90.0" text="Địa chỉ" />
-                  <TableColumn fx:id="phoneNumberColumn" prefWidth="75.0" text="Số điện thoại" />
+                  <TableColumn fx:id="phoneNumberColumn" prefWidth="75.0" text="SĐT" />
                   <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="paidPaymentColumn" prefWidth="75.0" text="Tổng tiền đã thanh toán" />
-                  <TableColumn fx:id="unpaidPaymentColumn" prefWidth="75.0" text="Tổng tiền chưa thanh toán" />
+                  <TableColumn fx:id="paidPaymentColumn" prefWidth="75.0" text="Đã trả" />
+                  <TableColumn fx:id="unpaidPaymentColumn" prefWidth="75.0" text="Còn nợ" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

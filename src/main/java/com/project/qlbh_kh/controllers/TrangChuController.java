@@ -17,7 +17,7 @@ public class TrangChuController {
     @FXML private Label totalReceiverIn;
     @FXML private Button customerOutManageButton;
     @FXML private Button productManageButton;
-
+    @FXML private Button customerInManageButton;
     @FXML
     private Button receiverInManageButton;
 
@@ -85,6 +85,15 @@ public class TrangChuController {
             if (mainAppController != null) {
                 try {
                     mainAppController.loadContent("/com/project/qlbh_kh/views/QuanLyKhachMuaView.fxml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        customerInManageButton.setOnAction(event -> {
+            if (mainAppController != null) {
+                try {
+                    mainAppController.loadContent("/com/project/qlbh_kh/views/QuanLyNhaCungCapView.fxml");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
