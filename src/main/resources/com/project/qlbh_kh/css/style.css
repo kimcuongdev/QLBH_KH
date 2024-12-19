@@ -32,7 +32,7 @@
     -fx-text-fill: white;
     -fx-background-radius: 20px;
     -fx-font-size: 18px;
-    -fx-padding: 8px 15px;
+    -fx-padding: 4px 10px;
 }
 
 .search-field {
@@ -41,6 +41,10 @@
 
 .button:hover {
     -fx-background-color: #004080; /* Đậm hơn khi hover */
+}
+.button_reset{
+    -fx-background-color:white;
+    -fx-padding:0px;
 }
 
 /* TextField */

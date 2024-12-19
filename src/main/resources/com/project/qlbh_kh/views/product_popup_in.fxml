@@ -13,7 +13,7 @@
     <TableView fx:id="tableView">
         <columns>
             <TableColumn fx:id="idColumn" prefWidth="34.0" text="ID" />
-            <TableColumn fx:id="nameColumn" prefWidth="121.0" text="Mặt Hàng" />
+            <TableColumn fx:id="nameColumn" prefWidth="121.0" text"Thêm mặt hàng" />
             <TableColumn fx:id="priceColumn" text="Giá" />
         </columns>
     </TableView>

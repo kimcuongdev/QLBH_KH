@@ -8,17 +8,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<VBox minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TruyXuatHoaDonController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.TruyXuatHoaDonController">
    <children>
-      <GridPane hgap="10.0" vgap="10.0">
+      <GridPane hgap="10.0" style="-fx-background-color: white;" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -50,7 +50,15 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" onMouseClicked="#resetCustomer" text="Chọn lại" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetCustomer" style="-fx-background-color: white;" GridPane.columnIndex="2">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/reset-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Label text="Người nhận" GridPane.columnIndex="3">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -68,7 +76,15 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" onMouseClicked="#resetReceiver" text="Chọn lại" GridPane.columnIndex="5" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetCustomer" style="-fx-background-color: white;" GridPane.columnIndex="5">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/reset-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Label text="Đến ngày" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -95,8 +111,24 @@
             </Label>
             <DatePicker fx:id="fromDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterFromDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <DatePicker fx:id="toDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#enterToDate" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#resetToDate" text="Chọn lại" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#resetFromDate" text="Chọn lại" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#resetToDate" style="-fx-background-color: white;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/reset-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#resetFromDate" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/reset-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Label text="Thao tác" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -115,7 +147,7 @@
                </font>
             </Button>
             <ComboBox fx:id="operationBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onMouseClicked="#resetOperation" text="Chọn lại" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
             <Label text="Truy xuất hóa đơn" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
