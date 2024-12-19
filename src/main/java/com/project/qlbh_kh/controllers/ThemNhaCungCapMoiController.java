@@ -55,7 +55,7 @@ public class ThemNhaCungCapMoiController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi openProductList
                         if (mainController != null) {
-                            mainController.openCustomerInList();
+                            mainController.openCustomerInList(3);
                         }
                     }
                 });

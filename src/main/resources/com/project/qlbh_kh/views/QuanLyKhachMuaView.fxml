@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyKhachMuaController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyKhachMuaController">
    <children>
       <Label alignment="TOP_CENTER" text="Quản lý khách mua">
          <font>
@@ -28,7 +28,7 @@
       </HBox>
       <HBox prefHeight="86.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <TableView fx:id="tableView" prefHeight="255.0" prefWidth="388.0" HBox.hgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="customerOutNameColumn" prefWidth="116.0" text="Tên khách hàng" />
                   <TableColumn fx:id="addressColumn" prefWidth="90.0" text="Địa chỉ" />
@@ -41,20 +41,27 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <VBox alignment="TOP_CENTER" prefHeight="118.0" prefWidth="189.0">
+            <VBox alignment="TOP_CENTER" spacing="10.0">
                <children>
-                  <Button fx:id="addNewCustomerOutButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addNewCustomerOut" prefHeight="39.0" prefWidth="193.0" text="Thêm khách hàng">
+                  <Button fx:id="addNewCustomerOutButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addNewCustomerOut" text="Thêm khách hàng">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="reloadTableButton" mnemonicParsing="false" onAction="#openCustomerOutList" prefHeight="39.0" prefWidth="192.0" text="Tải lại bảng">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
+                  <Button fx:id="statisticThisMonthButton" mnemonicParsing="false" text="Thống kê tháng này">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="statisticThisYearButton" mnemonicParsing="false" text="Thống kê năm này">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="statisticAllButton" mnemonicParsing="false" text="Thống kê toàn bộ">
                      <font>
                         <Font size="18.0" />
                      </font>

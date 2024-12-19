@@ -55,7 +55,7 @@ public class ThemKhachMuaMoiController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi openProductList
                         if (mainController != null) {
-                            mainController.openCustomerOutList();
+                            mainController.openCustomerOutList(3);
                         }
                     }
                 });
