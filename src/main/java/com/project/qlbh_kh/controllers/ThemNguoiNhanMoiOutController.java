@@ -74,7 +74,7 @@ public class ThemNguoiNhanMoiOutController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi openProductList
                         if (mainController != null) {
-                            mainController.loadReceiverList();
+                            mainController.loadReceiverList(3);
                         }
                     }
                 });

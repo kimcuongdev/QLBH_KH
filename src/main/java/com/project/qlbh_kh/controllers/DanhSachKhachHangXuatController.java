@@ -12,7 +12,7 @@ public class DanhSachKhachHangXuatController extends DanhSachKhachHangController
     @Override
     public void loadCustomerList()
     {
-        String sql = "exec customers_out_list";
+        String sql = "exec customers_out_list 3";
         try
         {
             Connection connection = JDBCUtil.getConnection();

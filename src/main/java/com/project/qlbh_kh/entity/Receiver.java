@@ -8,18 +8,28 @@ public class Receiver {
     private String operation;
     private String phone_number;
     private String email;
-    public Receiver(int receiver_id, String name, String address, String phone_number, String email){
+    private int total_order;
+    public Receiver(int receiver_id, String name, String address, String phone_number, String email, int total_order){
         this.receiver_id = receiver_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
         this.email = email;
+        this.total_order = total_order;
     }
     public Receiver(int receiver_id, String name, String address, String phone_number){
         this.receiver_id = receiver_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
+    }
+
+    public void setReceiver_id(int receiver_id) {this.receiver_id = receiver_id;}
+
+    public int getTotal_order() {return total_order;}
+
+    public void setTotal_order(int total_order) {
+        this.total_order = total_order;
     }
 
     public int getReceiver_id() {

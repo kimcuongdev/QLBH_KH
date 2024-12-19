@@ -68,7 +68,7 @@ public class ThemNguoiNhanMoiInController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi openProductList
                         if (mainController != null) {
-                            mainController.loadReceiverList();
+                            mainController.loadReceiverList(3);
                         }
                     }
                 });

@@ -40,7 +40,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
-                <VBox spacing="10.0">
+                <VBox alignment="TOP_CENTER" spacing="10.0">
                     <children>
                         <Button fx:id="addNewReceiver" onAction="#addNewReceiver" text="Thêm người nhận">
                             <VBox.margin>
@@ -55,7 +55,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="statisticThisYearButton" mnemonicParsing="false" text="Thống kê toàn bộ">
+                  <Button fx:id="statisticThisYearButton" mnemonicParsing="false" text="Thống kê năm này">
                      <font>
                         <Font size="18.0" />
                      </font>
