@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -93,7 +94,7 @@
    </GridPane>
 
    <!-- TableView -->
-   <TableView fx:id="tableView" prefHeight="238.0" prefWidth="534.0" VBox.vgrow="SOMETIMES">
+   <TableView fx:id="tableView" prefHeight="250.0" prefWidth="550.0" VBox.vgrow="SOMETIMES">
       <columns>
          <TableColumn fx:id="productNameColumn" prefWidth="156.0" text="Mặt Hàng" />
          <TableColumn fx:id="quantityColumn" prefWidth="89.0" text="Số Lượng" />
@@ -104,32 +105,67 @@
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
    </TableView>
-   <HBox alignment="TOP_RIGHT" spacing="10">
-      <Label alignment="CENTER" prefHeight="25.0" prefWidth="119.0" text="Tổng:">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <HBox.margin>
-            <Insets left="100.0" />
-         </HBox.margin>
-      </Label>
-      <TextField fx:id="tongTienTextField" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="300.0" />
+   <HBox spacing="10">
+      <HBox alignment="TOP_LEFT" spacing="10" />
+      <HBox alignment="TOP_RIGHT" spacing="10" HBox.hgrow="ALWAYS">
+         <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="125.0" text="Tổng:">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
+         </Label>
+         <TextField fx:id="tongTienTextField" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="200.0">
+            <HBox.margin>
+               <Insets top="5.0" />
+            </HBox.margin></TextField>
+      </HBox>
    </HBox>
    <!-- Người nhận -->
-   <HBox alignment="TOP_RIGHT" spacing="10">
-      <Label alignment="CENTER" text="Người nhận hàng:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="receiverNameField" onMouseClicked="#openReceiverList" />
-      <Button fx:id="addReceiverButton" mnemonicParsing="false" onAction="#addReceiver" text="+" />
-      <Label alignment="CENTER" text="Ngày nhận hàng:">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="fromDate" onAction="#enterFromDate" prefHeight="26.0" prefWidth="118.0" />
+   <HBox spacing="10">
+      <HBox alignment="TOP_LEFT" spacing="10">
+         <Label alignment="TOP_LEFT" text="Người nhận hàng:" HBox.hgrow="ALWAYS">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <TextField fx:id="receiverNameField" alignment="BOTTOM_LEFT" onMouseClicked="#openReceiverList">
+            <HBox.margin>
+               <Insets top="5.0" />
+            </HBox.margin></TextField>
+         <Button fx:id="addReceiverButton" alignment="TOP_LEFT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addReceiver" text="+">
+            <HBox.margin>
+               <Insets top="5.0" />
+            </HBox.margin></Button>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" spacing="10" HBox.hgrow="ALWAYS">
+         <Label alignment="TOP_RIGHT" text="Ngày nhận hàng:">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
+         </Label>
+         <DatePicker fx:id="fromDate" nodeOrientation="RIGHT_TO_LEFT" onAction="#enterFromDate" prefHeight="20.0" prefWidth="120.0">
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
+            <HBox.margin>
+               <Insets top="5.0" />
+            </HBox.margin>
+         </DatePicker>
+         <Label alignment="TOP_LEFT" text="Trạng Thái:">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="statusBox" prefWidth="150.0">
+            <HBox.margin>
+               <Insets top="5.0" />
+            </HBox.margin></ComboBox>
+      </HBox>
    </HBox>
 
 
@@ -137,12 +173,6 @@
    <HBox alignment="CENTER" spacing="20.0">
       <!-- Nút Lưu ở góc phải -->
       <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
-         <Label alignment="CENTER" text="Trạng Thái:">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Label>
-         <ComboBox fx:id="statusBox" prefWidth="150.0" />
          <DatePicker fx:id="toDate" prefHeight="26.0" prefWidth="0.0" visible="false" />
          <Button fx:id="saveButton" onAction="#luuHoaDon" prefWidth="100.0" text="Lưu" />
       </HBox>
