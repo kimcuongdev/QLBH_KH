@@ -80,6 +80,10 @@ public class QuanLyHangXuatController extends BasicController {
         tableView.setOnMouseClicked(mouseEvent -> {
             Product_manager selectedItem = tableView.getSelectionModel().getSelectedItem();
             showOrder(selectedItem.getId(),"out");
+            System.out.println("after show");
+            System.out.println(updated);
+            if (updated) executeQuery();
+            updated = false;
         });
 
     }
