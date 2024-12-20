@@ -57,7 +57,7 @@ public class TaoHoaDonController extends BasicController {
             }
         }));
         operationBox.setItems(operations);
-        operationBox.setValue("Nhập");
+//        operationBox.setValue("Nhập");
         operationBox.valueProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (oldValue == null || !oldValue.equals(newValue))
             {
@@ -70,7 +70,7 @@ public class TaoHoaDonController extends BasicController {
                 tongTienTextField.clear();
                 phoneNumberField.clear();
                 addressField.clear();
-
+//                fromDate = null;
             }
 
         }));
@@ -85,6 +85,12 @@ public class TaoHoaDonController extends BasicController {
                 customerNameField.setDisable(true);
                 receiverNameField.setDisable(true);
             }
+            if (newValue.equals("Nhập")) {
+                unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
+            } else if (newValue.equals("Xuất")) {
+                unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_out"));
+            }
+//            tableView.refresh();
         }));
 
         ObservableList<String> status = FXCollections.observableArrayList("Chưa thanh toán","Đã thanh toán" );
@@ -95,12 +101,6 @@ public class TaoHoaDonController extends BasicController {
 
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("prod_name"));
 
-        // Thiết lập cho cột giá
-        this.operation = "in";
-        if(operation.equals("in"))
-            unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
-        else if(operation.equals("out"))
-            unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price_out"));
 
         // Thiết lập cho cột số lượng
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -128,6 +128,8 @@ public class TaoHoaDonController extends BasicController {
                     () -> {
                         try {
                             double price = product.getPrice_in();
+                            if(operation.equals("out"))
+                                price = product.getPrice_out();
                             int quantity = product.getQuantity();
                             return price * quantity ;
                         } catch (NumberFormatException nfe) {
@@ -282,7 +284,6 @@ public class TaoHoaDonController extends BasicController {
     //
     @FXML
     private void addProduct() {
-        if(operation.equals("in")){
             String fxmlPath = "/com/project/qlbh_kh/views/product_popup_in.fxml";
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -303,13 +304,16 @@ public class TaoHoaDonController extends BasicController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
     }
 
     private void tinhTongTien() {
         Double tongTien = productList.stream()
                 .mapToDouble(product -> product.getPrice_in() * product.getQuantity())
                 .sum();
+        if(operation.equals("out"))
+            tongTien = productList.stream()
+                    .mapToDouble(product -> product.getPrice_out() * product.getQuantity())
+                    .sum();
         tongTienTextField.setText(String.valueOf(tongTien));
     }
     public void setCustomerInformation(int customerID)
@@ -404,7 +408,7 @@ public class TaoHoaDonController extends BasicController {
                     System.out.println("Them san pham loi "  + e);
                 }
             }
-            System.out.println("Tao Hoa Don Thanh cong");
+
         }
         else {
             try
@@ -459,14 +463,15 @@ public class TaoHoaDonController extends BasicController {
             }
             System.out.println("Tao Hoa Don Thanh cong");
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Tạo hóa đơn");
+        alert.setHeaderText(null);
+        alert.setContentText("Tạo hóa đơn thành công!");
+        alert.showAndWait();
     }
     @FXML
     public void addNewCustomer()
     {
-        if(operation.equals("in")){
-
-        }
-
         System.out.println("addnew");
         try
         {
