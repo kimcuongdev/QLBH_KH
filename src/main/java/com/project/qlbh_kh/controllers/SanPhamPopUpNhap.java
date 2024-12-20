@@ -5,11 +5,15 @@ import com.project.qlbh_kh.utils.JDBCUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -20,128 +24,105 @@ import java.util.ResourceBundle;
 
 public class SanPhamPopUpNhap implements Initializable {
 
-    @FXML
-    private TextField productNameField; // Trường nhập tên mặt hàng
-
-    @FXML
-    private TextField productPriceField; // Trường nhập giá
-
-    @FXML
-    private TableView<Product> tableView; // Bảng hiển thị mặt hàng
-    @FXML
-    private TableColumn<Product, Integer> idColumn;
-    @FXML
-    private TableColumn<Product, String> nameColumn;
-    @FXML
-    private TableColumn<Product, Double> priceColumn;
-    ObservableList<Product> products = FXCollections.observableArrayList(); // Danh sách mặt hàng
-
+    @FXML private TextField searchField;
+    @FXML private TableView<Product> tableView; //tableView lưu product
+    @FXML private TableColumn<Product,String> productNameColumn; //tableColumn luu thuoc tinh productName co kieu du lieu la String
+    @FXML private TableColumn<Product,Double> priceInColumn;
+    @FXML private TableColumn<Product,Double> priceOutColumn;
+    @FXML private TableColumn<Product,String> unitPriceColumn;
+    @FXML private Button addNewProductButton;
+    @FXML private Button reloadTableButton;
+    private ObservableList<Product> productList = FXCollections.observableArrayList(); //observablelist de luu nhung doi tuong duoc hien thi trong tableview
     private TaoHoaDonController mainController;
 
 
     public void setMainController(TaoHoaDonController mainController) {
         this.mainController = mainController;
-//        this.type =
     }
 
     @Override
+    //phuong thuong initialize se duoc goi de set up cac doi tuong trong scene truoc khi hien thi tren man hinh
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idColumn.setPrefWidth(40);
-        nameColumn.setPrefWidth(150);
-        priceColumn.setPrefWidth(100);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("prod_id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("prod_name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
-
-        loadProductName();
-
-        tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Kiểm tra xem có phải nhấp đúp không
-                Product selectedProduct = tableView.getSelectionModel().getSelectedItem(); // Lấy sản phẩm được chọn
-                if (selectedProduct != null) {
-                    handleDoubleClick(selectedProduct);
-
-                    // Close the current stage after selecting a product
-                    Stage stage = (Stage) tableView.getScene().getWindow();
-                    stage.close();
-                }
-            }
+        //thiet lap thuoc tinh cho cac cot, dung ten thuoc tinh cua lop product
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("prod_name"));
+        priceInColumn.setCellValueFactory(new PropertyValueFactory<>("price_in"));
+        priceOutColumn.setCellValueFactory(new PropertyValueFactory<>("price_out"));
+        unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unit_sold"));
+        //loc san pham trong tableview khi tuong tac voi searchfield
+        searchField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            tableView.setItems(productList.filtered(Product -> {
+                return Product.getProd_name().toLowerCase().contains(newValue);
+            }));
+        }));
+        tableView.setOnMouseClicked(mouseEvent -> {
+            Product selectedProduct = tableView.getSelectionModel().getSelectedItem();
+            if(selectedProduct != null)
+                mainController.addProductToTable(selectedProduct);
+            Stage stage = (Stage) tableView.getScene().getWindow();
+            stage.close();
         });
-    }
+        //hien thi tat ca mat hang
+        openProductList();
 
-    // Method to load products from the database
-    public void loadProductName() {
-        String sql = "use BTL_QL_BanHang\n" +
-                "select prod_id, prod_name," + "price_in" + "\n" +
-                "from products_tb";
-        try {
+    }
+    @FXML
+    public void openProductList()
+    {
+        //clear searchfield
+        searchField.clear();
+        try
+        {
+            //connect voi sqlsever
             Connection connection = JDBCUtil.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet resultSet = stmt.executeQuery();
-            products.clear();
-            while (resultSet.next()) {
-                products.add(new Product(
+            //nhap truy van
+            PreparedStatement preparedStatement = connection.prepareStatement("exec openProductList");
+            //thuc hien truy van
+            ResultSet resultSet = preparedStatement.executeQuery();
+            //clear productlist de tranh lap lai
+            productList.clear();
+            //lay cac ban ghi trong truy van sql
+            while(resultSet.next())
+            {
+                productList.add(new Product(
                         resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getDouble(3))
-                );
-                System.out.println(resultSet.getInt(1) + resultSet.getString(2) + resultSet.getDouble(3));
+                        resultSet.getDouble(3),
+                        resultSet.getDouble(4),
+                        resultSet.getString(5)
+                ));
             }
-            tableView.setItems(products);
-        } catch (Exception e) {
+            //hien thi len tableview
+            tableView.setItems(productList);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    //mo cua so phu de them mat hang moi
+    @FXML
+    public void addNewProduct()
+    {
+        System.out.println("addnew");
+        try
+        {
+            //load scence them mat hang
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemMatHangMoiView.fxml"));
+            Scene addNewProductScene = new Scene(fxmlLoader.load());
+            //tao stage moi
+            Stage addNewProductStage = new Stage();
+            //modal: phai dong cua so con neu muon thao tac cua so cha
+            addNewProductStage.initModality(Modality.APPLICATION_MODAL);
+            addNewProductStage.initOwner(addNewProductButton.getScene().getWindow());
+            addNewProductStage.setTitle("Them mat hang moi");
+            addNewProductStage.setScene(addNewProductScene);
+            //show
+            addNewProductStage.showAndWait();
+            //reload lai tableview sau khi them mat hang moi
+            openProductList();
+        }catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    private void handleDoubleClick(Product selectedProduct) {
-        if (mainController != null) {
-            mainController.addProductToTable(selectedProduct); // Gọi phương thức để thêm mặt hàng vào bảng trong HelloController
-        }
-    }
-
-    // Handle adding a new product
-    @FXML
-    private void handleAddProduct() {
-        String name = productNameField.getText();
-        String priceText = productPriceField.getText();
-
-        if (name.isEmpty() || priceText.isEmpty()) {
-            System.out.println("Vui lòng nhập đủ thông tin.");
-            return;
-        }
-
-        try {
-            double price = Integer.parseInt(priceText); // Convert the price to integer
-            Product newProduct = new Product(name, price);
-
-            // Insert the new product into the database
-            String sql = "INSERT INTO products_tb (prod_name, price_in) VALUES (?, ?)"; // Assuming price_in is used for input price
-            try (Connection connection = JDBCUtil.getConnection();
-                 PreparedStatement stmt = connection.prepareStatement(sql)) {
-
-                stmt.setString(1, name); // Set the product name
-                stmt.setDouble(2, price);   // Set the price
-                int rowsAffected = stmt.executeUpdate(); // Execute the insert query
-
-                if (rowsAffected > 0) {
-                    System.out.println("Sản phẩm mới đã được thêm vào cơ sở dữ liệu.");
-                    // After successful insertion, add the product to the local list and tableView
-                    products.add(newProduct); // Add product to the local ObservableList
-                    tableView.setItems(products); // Update the TableView
-                } else {
-                    System.out.println("Lỗi khi thêm sản phẩm.");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Lỗi khi kết nối và thêm sản phẩm vào cơ sở dữ liệu.");
-            }
-
-            // Clear input fields after adding
-            productNameField.clear();
-            productPriceField.clear();
-
-        } catch (NumberFormatException e) {
-            System.out.println("Giá phải là một số hợp lệ.");
-        }
-    }
 }

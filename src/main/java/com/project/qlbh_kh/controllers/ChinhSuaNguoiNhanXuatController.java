@@ -32,6 +32,7 @@ public class ChinhSuaNguoiNhanXuatController {
     }
     public void setSelectedReceiver(Receiver selectedReceiver) {
         this.selectedReceiver = selectedReceiver;
+        receiverNameLabel.setText(selectedReceiver.getName());
         oldAddress.setText(selectedReceiver.getAddress());
         oldEmail.setText(selectedReceiver.getEmail());
         oldPhoneNumber.setText(selectedReceiver.getPhone_number());

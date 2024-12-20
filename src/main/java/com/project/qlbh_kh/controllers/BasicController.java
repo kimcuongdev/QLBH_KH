@@ -32,8 +32,6 @@ public class BasicController implements Initializable {
     protected ComboBox<String> operationBox;
     protected String operation;
 
-    @FXML
-    protected TextField customerField;
 
     @FXML
     protected ComboBox<String> orderTypeBox;
