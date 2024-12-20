@@ -26,10 +26,10 @@ public class TaoHoaDonController extends BasicController {
     ObservableList<Product> productList = FXCollections.observableArrayList();;
     @FXML public TextField phoneNumberField;
     @FXML public TextField addressField;
-    @FXML public Button findCustomerButton;
+    @FXML public Button addCustomerButton;
     @FXML public Button addProductButton;
     @FXML public Button saveButton;
-    @FXML public Button findReceiverButton;
+    @FXML public Button addReceiverButton;
 
     @FXML public TableView<Product> tableView;
     @FXML public TableColumn<Product,String> productNameColumn;
@@ -38,10 +38,13 @@ public class TaoHoaDonController extends BasicController {
     @FXML public TableColumn<Product,Integer> quantityColumn;
     @FXML
     public TextField tongTienTextField;
+    @FXML
+    public ComboBox<String> statusBox;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         super.initialize(url,resourceBundle);
+
         ObservableList<String> operations = FXCollections.observableArrayList("Nhập", "Xuất");
         customerNameField.textProperty().addListener(((observableValue, oldValue,newValue) -> {
             // Kiểm tra xem TextField có trống không
@@ -54,7 +57,7 @@ public class TaoHoaDonController extends BasicController {
             }
         }));
         operationBox.setItems(operations);
-
+        operationBox.setValue("Nhập");
         operationBox.valueProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (oldValue == null || !oldValue.equals(newValue))
             {
@@ -62,7 +65,16 @@ public class TaoHoaDonController extends BasicController {
                 selectedCustomerId = 0;
                 receiverNameField.clear();
                 selectedReceiverId = 0;
+                productList.clear();
+                tableView.refresh();
+                tongTienTextField.clear();
+                phoneNumberField.clear();
+                addressField.clear();
+
             }
+
+        }));
+        operationBox.valueProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue.equals("Nhập") || newValue.equals("Xuất"))
             {
                 customerNameField.setDisable(false);
@@ -74,6 +86,10 @@ public class TaoHoaDonController extends BasicController {
                 receiverNameField.setDisable(true);
             }
         }));
+
+        ObservableList<String> status = FXCollections.observableArrayList("Chưa thanh toán","Đã thanh toán" );
+        statusBox.setItems(status);
+        statusBox.setValue("Chưa thanh toán");
 
         tableView.setEditable(true);
 
@@ -276,31 +292,9 @@ public class TaoHoaDonController extends BasicController {
                 }
 
                 Scene productInList = new Scene(loader.load());
-                SanPhamPopUpNhap popupController = loader.getController();
-                popupController.setMainController(this);
                 Stage popupStage = new Stage();
-                popupStage.initModality(Modality.APPLICATION_MODAL);
-                popupStage.initOwner(tableView.getScene().getWindow());
-                popupStage.setTitle("Chọn Mặt Hàng");
-                popupStage.setScene(productInList);
-                popupStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            String fxmlPath = "/com/project/qlbh_kh/views/product_popup_out.fxml";
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                if (loader.getLocation() == null) {
-                    System.out.println("FXML file not found: " + fxmlPath);
-                    return;
-                }
-
-                Scene productInList = new Scene(loader.load());
-                SanPhamPopUpXuat popupController = loader.getController();
-                popupController.setMainController(this);
-                Stage popupStage = new Stage();
+                SanPhamPopUpNhap controller = loader.getController();
+                controller.setMainController(this);
                 popupStage.initModality(Modality.APPLICATION_MODAL);
                 popupStage.initOwner(tableView.getScene().getWindow());
                 popupStage.setTitle("Chọn Mặt Hàng");
@@ -374,8 +368,13 @@ public class TaoHoaDonController extends BasicController {
                     // Lấy giá trị của OUTPUT parameter
                     newOrderId = stmt.getInt(4);  // Lấy giá trị của @new_order_id
 
-                    // In kết quả
-//                System.out.println("New Order ID: " + newOrderId);
+                    int confirmedStatus = statusBox.getSelectionModel().getSelectedIndex();
+                    String update =
+                            "update order_in_tb set status = (?) where order_in_id = (?)" ;
+                    PreparedStatement preparedStatement = connection.prepareStatement(update);
+                    preparedStatement.setInt(1, confirmedStatus);
+                    preparedStatement.setInt(2, newOrderId);
+                    preparedStatement.executeUpdate();
 
                 }
                 catch (Exception e){
@@ -386,8 +385,10 @@ public class TaoHoaDonController extends BasicController {
             {
                 e.printStackTrace();
             }
-            Connection connection = JDBCUtil.getConnection();
+//            String updateStatus = "update order_in_tb set status = (?) where order_in_id = (?)"
 
+
+            Connection connection = JDBCUtil.getConnection();
             for (Product product : productList){
                 System.out.println(newOrderId +" "+  product.getProd_id() + " " + product.getQuantity());
                 try{
@@ -459,4 +460,64 @@ public class TaoHoaDonController extends BasicController {
             System.out.println("Tao Hoa Don Thanh cong");
         }
     }
+    @FXML
+    public void addNewCustomer()
+    {
+        if(operation.equals("in")){
+
+        }
+
+        System.out.println("addnew");
+        try
+        {
+            //load scence them mat hang
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemNhaCungCapMoiView.fxml"));
+            if(operation.equals("out")){
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemKhachMuaMoiView.fxml"));
+            }
+            Scene addNewCustomerInScene = new Scene(fxmlLoader.load());
+            //set controller cha cho scene moi
+
+            //tao stage moi
+            Stage addNewProductStage = new Stage();
+            //modal: phai dong cua so con neu muon thao tac cua so cha
+            addNewProductStage.initModality(Modality.APPLICATION_MODAL);
+            addNewProductStage.initOwner(addCustomerButton.getScene().getWindow());
+            addNewProductStage.setTitle("Them nha cung cap moi");
+            addNewProductStage.setScene(addNewCustomerInScene);
+            //show
+            addNewProductStage.show();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void addReceiver(){
+        System.out.println("addnew");
+        try
+        {
+            //load scence them mat hang
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemNguoiNhanMoiInView.fxml"));
+            if(operation.equals("out")){
+                fxmlLoader = new FXMLLoader(getClass().getResource("/com/project/qlbh_kh/views/ThemNguoiNhanMoiOutView.fxml"));
+            }
+            Scene addNewCustomerInScene = new Scene(fxmlLoader.load());
+            //set controller cha cho scene moi
+
+            //tao stage moi
+            Stage addNewProductStage = new Stage();
+            //modal: phai dong cua so con neu muon thao tac cua so cha
+            addNewProductStage.initModality(Modality.APPLICATION_MODAL);
+            addNewProductStage.initOwner(addReceiverButton.getScene().getWindow());
+            addNewProductStage.setTitle("Them nha cung cap moi");
+            addNewProductStage.setScene(addNewCustomerInScene);
+            //show
+            addNewProductStage.show();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
