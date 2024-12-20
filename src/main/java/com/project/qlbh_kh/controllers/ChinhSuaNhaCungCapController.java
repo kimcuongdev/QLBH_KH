@@ -63,7 +63,7 @@ public class ChinhSuaNhaCungCapController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi phương thức cập nhật danh sách trong mainController
                         if (mainController != null) {
-                            mainController.openCustomerInList();
+                            mainController.openCustomerInList(3);
                         }
                     }
                 });

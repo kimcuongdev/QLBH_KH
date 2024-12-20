@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="206.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyNguoiNhanInController">
+<VBox alignment="TOP_CENTER" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.qlbh_kh.controllers.QuanLyNguoiNhanInController">
     <children>
-        <Label alignment="CENTER" prefHeight="32.0" prefWidth="844.0" text="Quản lý vận chuyển mua vào">
+        <Label alignment="CENTER" text="Quản lý vận chuyển mua vào">
             <font>
                 <Font size="22.0" />
             </font>
         </Label>
-        <HBox prefHeight="20.0" prefWidth="850.0">
+        <HBox>
             <children>
                 <TextField fx:id="receiverNameField" promptText="Tìm kiếm theo tên người nhận hàng" HBox.hgrow="ALWAYS">
                     <font>
@@ -26,9 +26,9 @@
                 </TextField>
             </children>
         </HBox>
-        <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <HBox VBox.vgrow="ALWAYS">
             <children>
-                <TableView fx:id="receiverList" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                <TableView fx:id="receiverList" HBox.hgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="receiverNameColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="140.0" text="Tên Người Nhận" />
                         <TableColumn fx:id="addressColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="147.0" text="Địa chỉ" />
@@ -40,25 +40,32 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
-                <VBox prefHeight="155.0" prefWidth="176.0">
-                    <padding>
-                        <Insets bottom="10.0" top="10.0" />
-                    </padding>
+                <VBox alignment="TOP_CENTER" spacing="10.0">
                     <children>
-                        <Button fx:id="addNewReceiver" onAction="#addNewReceiver" prefHeight="40.0" prefWidth="200.0" text="Thêm người nhận">
+                        <Button fx:id="addNewReceiver" onAction="#addNewReceiver" text="Thêm người nhận">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets />
                             </VBox.margin>
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Button>
-                        <Button fx:id="reloadTable" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#refreshTableView" prefHeight="40.0" prefWidth="200.0" text="Tải lại bảng">
+                  <Button fx:id="statisticThisMonthButton" mnemonicParsing="false" text="Thống kê tháng này">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="statisticThisYearButton" mnemonicParsing="false" text="Thống kê năm này">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                        <Button fx:id="statisticAllButton" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Thống kê toàn bộ">
                             <font>
                                 <Font size="18.0" />
                             </font>
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets />
                             </VBox.margin></Button>
                     </children>
                 </VBox>

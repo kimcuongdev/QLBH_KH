@@ -29,7 +29,9 @@ public class QuanLyKhachMuaController implements Initializable {
     @FXML private TableColumn<Customer, Double> paidPaymentColumn;
     @FXML private TableColumn<Customer, Double> unpaidPaymentColumn;
     @FXML private Button addNewCustomerOutButton;
-    @FXML private Button reloadTableButton;
+    @FXML private Button statisticThisMonthButton;
+    @FXML private Button statisticThisYearButton;
+    @FXML private Button statisticAllButton;
     private ObservableList<Customer> customerOutList = FXCollections.observableArrayList(); //observablelist de luu nhung doi tuong duoc hien thi trong tableview
 
     @Override
@@ -54,11 +56,20 @@ public class QuanLyKhachMuaController implements Initializable {
                 return Customer.getName().toLowerCase().contains(newValue.toLowerCase());
             }));
         }));
+        statisticThisMonthButton.setOnMouseClicked(mouseEvent -> {
+            openCustomerOutList(1);
+        });
+        statisticThisYearButton.setOnMouseClicked(mouseEvent -> {
+            openCustomerOutList(2);
+        });
+        statisticAllButton.setOnMouseClicked(mouseEvent -> {
+            openCustomerOutList(3);
+        });
         //hien thi tat ca mat hang
-        openCustomerOutList();
+        openCustomerOutList(3);
     }
     @FXML
-    public void openCustomerOutList()
+    public void openCustomerOutList(int statisticType)
     {
         //clear searchfield
         searchField.clear();
@@ -67,7 +78,8 @@ public class QuanLyKhachMuaController implements Initializable {
             //connect voi sqlsever
             Connection connection = JDBCUtil.getConnection();
             //nhap truy van
-            PreparedStatement preparedStatement = connection.prepareStatement("exec customers_out_list");
+            PreparedStatement preparedStatement = connection.prepareStatement("{call dbo.customers_out_list(?)}");
+            preparedStatement.setInt(1,statisticType);
             //thuc hien truy van
             ResultSet resultSet = preparedStatement.executeQuery();
             //clear productlist de tranh lap lai

@@ -69,6 +69,10 @@ public class TruyXuatKhoController extends BasicController {
             Stock_manager selectedItem = tableView.getSelectionModel().getSelectedItem();
             if (selectedItem.getOperation().equals("Nhập"))  showOrder(selectedItem.getOrderId(),"in");
             else showOrder(selectedItem.getOrderId(),"out");
+            System.out.println("after show");
+            System.out.println(updated);
+            if (updated) executeQuery();
+            updated = false;
         });
     }
     @FXML

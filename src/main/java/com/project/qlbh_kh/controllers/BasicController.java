@@ -56,7 +56,12 @@ public class BasicController implements Initializable {
     @FXML
     protected  TextField receiverNameField;
     protected int selectedReceiverId;
-
+    protected boolean updated = false;
+    public void setUpdated(boolean updated)
+    {
+        this.updated = updated;
+        System.out.println("set updated true");
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // ComboBox
@@ -161,12 +166,13 @@ public class BasicController implements Initializable {
             Parent root = fxmlLoader.load();
             HienThiHoaDonController hienThiHoaDonController = fxmlLoader.getController();
             hienThiHoaDonController.setUpData(id,operation);
+            hienThiHoaDonController.setMainController(this);
             Stage orderStage = new Stage();
             orderStage.initModality(Modality.APPLICATION_MODAL);
             //orderStage.initOwner();
             orderStage.setTitle("Hien thi hoa don");
             orderStage.setScene(new Scene(root, 845, 592));
-            orderStage.show();
+            orderStage.showAndWait();
         } catch (Exception e)
         {
             e.printStackTrace();

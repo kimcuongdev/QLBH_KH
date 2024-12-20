@@ -70,6 +70,6 @@ public class ChinhSuaNguoiNhanNhapController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        this.mainController.loadReceiverList();
+        this.mainController.loadReceiverList(3);
     }
 }

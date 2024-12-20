@@ -95,8 +95,25 @@ public class TruyXuatHoaDonController extends BasicController {
         //chon hoa don
         tableView.setOnMouseClicked(mouseEvent -> {
             Order_manager selectedItem = tableView.getSelectionModel().getSelectedItem();
-            if (selectedItem.getOperation().equals("Nhập"))  showOrder(selectedItem.getId(),"in");
-            else showOrder(selectedItem.getId(),"out");
+            if (selectedItem.getOperation().equals("Nhập"))
+            {
+                showOrder(selectedItem.getId(),"in");
+                System.out.println("after show");
+                System.out.println(updated);
+                if (updated) executeQuery();
+                updated = false;
+            }
+            else
+            {
+                showOrder(selectedItem.getId(),"out");
+                System.out.println("after show");
+                System.out.println(updated);
+                if (updated) executeQuery();
+                updated = false;
+            }
+//            System.out.println(updated);
+//            if (updated) executeQuery();
+//            updated = false;
         });
 
     }

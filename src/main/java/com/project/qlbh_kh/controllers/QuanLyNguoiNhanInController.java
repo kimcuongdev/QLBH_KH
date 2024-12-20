@@ -42,8 +42,9 @@ public class QuanLyNguoiNhanInController implements Initializable {
     protected TableColumn<Receiver, String> phoneNumberColumn;
     @FXML
     protected Button addNewReceiver;
-    @FXML
-    private Button reloadTable;
+    @FXML private Button statisticThisMonthButton;
+    @FXML private Button statisticThisYearButton;
+    @FXML private Button statisticAllButton;
     protected BasicController mainController;
     public void setMainController(BasicController basicController) {
         this.mainController = basicController;
@@ -55,37 +56,23 @@ public class QuanLyNguoiNhanInController implements Initializable {
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        countColumn.setCellValueFactory(cellData -> {
-            return Bindings.createIntegerBinding(
-                    () -> {
-                        try {
-                            Receiver receiver = cellData.getValue();
-                            Connection connection = JDBCUtil.getConnection();
-                            String sql = "SELECT COUNT(*)\n" +
-                                    "FROM order_in_tb\n" +
-                                    "WHERE receiver_in_id =" + receiver.getReceiver_id() + ";";
-                            System.out.println("id ng nhan" + receiver.getReceiver_id());
-                            PreparedStatement statement = connection.prepareStatement(sql);
-                            ResultSet resultSet = statement.executeQuery();
-                            if (resultSet.next()) {
-                                int orderCount = resultSet.getInt(1);
-                                System.out.println("order count" + orderCount);
-                                return orderCount;
-                            }
-                        } catch (Exception e) {
-                            return 0;
-                        }
-                        return null;
-                    }
-            ).asObject();
-        });
+        countColumn.setCellValueFactory(new PropertyValueFactory<>("total_order"));
         receiverList.setOnMouseClicked(mouseEvent -> {
             System.out.println("modify");
             Receiver selectedReceiver = receiverList.getSelectionModel().getSelectedItem();
             modifyReceiver(selectedReceiver);
         });
+        statisticThisMonthButton.setOnMouseClicked(mouseEvent -> {
+            loadReceiverList(1);
+        });
+        statisticThisYearButton.setOnMouseClicked(mouseEvent -> {
+            loadReceiverList(2);
+        });
+        statisticAllButton.setOnMouseClicked(mouseEvent -> {
+            loadReceiverList(3);
+        });
         //load du lieu
-        loadReceiverList();
+        loadReceiverList(3);
         //cai dat bo loc tim kiem theo ten KH
         receiverNameField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
             receiverList.setItems(Receivers.filtered(Receiver -> {
@@ -103,14 +90,15 @@ public class QuanLyNguoiNhanInController implements Initializable {
             }
         }));
     }
-    public void loadReceiverList()
+    public void loadReceiverList(int statisticType)
     {
         Receivers.clear();
-        String sql = "exec receivers_in_list";
+        String sql = "{call dbo.receivers_in_list(?)}";
         try
         {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, statisticType);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next())
             {
@@ -119,7 +107,8 @@ public class QuanLyNguoiNhanInController implements Initializable {
                 String address = resultSet.getString(3);
                 String phone_number = resultSet.getString(4);
                 String email = resultSet.getString(5);
-                Receivers.add(new Receiver(id,name,address,phone_number,email));
+                int total_order = resultSet.getInt(6);
+                Receivers.add(new Receiver(id,name,address,phone_number,email,total_order));
             }
             receiverList.setItems(Receivers);
         } catch (Exception e)
@@ -170,9 +159,5 @@ public class QuanLyNguoiNhanInController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void refreshTableView() {
-        Receivers.clear();
-        loadReceiverList();
-    }
+
 }

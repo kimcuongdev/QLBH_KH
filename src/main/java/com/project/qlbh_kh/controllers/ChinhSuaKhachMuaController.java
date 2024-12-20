@@ -63,7 +63,7 @@ public class ChinhSuaKhachMuaController {
                         confirmButton.getScene().getWindow().hide();
                         // Gọi phương thức cập nhật danh sách trong mainController
                         if (mainController != null) {
-                            mainController.openCustomerOutList();
+                            mainController.openCustomerOutList(3);
                         }
                     }
                 });

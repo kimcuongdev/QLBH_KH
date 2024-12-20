@@ -12,7 +12,7 @@ public class DanhSachNguoiNhanNhapController extends DanhSachNguoiNhanController
     @Override
     public void loadReceiverList()
     {
-        String sql = "exec receivers_in_list";
+        String sql = "exec receivers_in_list 3";
         try
         {
             Connection connection = JDBCUtil.getConnection();
